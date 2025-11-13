@@ -1,30 +1,31 @@
 Problem: 
-* Freizeit und Hobby Fußballer wollen Fusball spielen, jedoch gehören sie keinem festen team an
-* Fusballspiele zu organisieren sind meist mühsam und unstrukturiert: Wer kommt?
-  Wo? Wie viele? und Wann
-* Spontan Matches zu finden oder sich Gruppen anschließen zu können, ist nicht leicht
-  und kann schnell frustierend werden 
+Freizeit und Hobby Fußballer wollen Fusball spielen, jedoch gehören sie keinem festen Team an.
+Fusballspiele zu organisieren sind meist mühsam und unstrukturiert: Wer kommt? Wo? Wie viele? und Wann?
+Spontan Matches zu finden oder sich Gruppen anschließen zu können, ist nicht leicht und kann schnell frustierend werden 
 
 Lösung: 
 Unser Dienst MatchUp wird diese Problematiken beseitigen. 
 
 Auf unserer Website werden freie Spielfelder und offene Matches in der Berliner Umgebung,
 mit allen nötigen Informationen angezeigt. Benutzer unseres Services haben die Möglichkeit 
-Spiele zu erstellen oder ihnen beizuterten. Somit übernimmt MatchUp die Organisation
+Spiele zu erstellen oder ihnen beizutreten. Somit übernimmt MatchUp die Organisation
 und ermöglicht spontane Fußballpartien. 
 
 Zielgruppe: 
-Die klare Zielgruppe sind Fusballer welche keinem festen Verein haben und flexibel Fusball spielen wollen.
+Die klare Zielgruppe sind Fußballer, welche nicht feste Mitglieder eines Vereines sind und flexibel Fußball spielen wollen.
 
 Gruppenziele: 
 Ziel ist es ein funktionsfägiges MVP umgesetzt zu bekommen. 
-Unsere Website soll Benutzfreundlich und vorallem übersichtlich bedienbar sein, Benutzer müssen ein 
-klares Verstandnis von MatchUp bekommen.
+Unsere Website soll Benutzerfreundlich und vorallem übersichtlich bedienbar sein, Benutzer müssen ein 
+klares Verständnis von MatchUp bekommen.
 Eine klare Teamaufteilung und Termintreue sind wesentliche Bausteine einer erfolgreichen 
-Gruppenarbeit und zählen dadurch zu unseren Zielen. Unser Projekt sollte rückblickend nicht von unseren 
-anfänglichen Ideen abweichen.
+Gruppenarbeit und zählen dadurch zu unseren Zielen. Unser Projekt sollte rückblickend nicht von unseren anfänglichen Ideen abweichen.
 
 Persönliche Ziele 
-Ayten: Mein Ziel ist es zum Ende unseres Projektes, neues gelernt zu haben und etwas greifabres gebaut zu haben. 
+Ayten: Mein Ziel ist es zum Ende unseres Projektes, neues gelernt zu haben und etwas greifbares gebaut zu haben. 
 Ich werde neue Umgebugssprachen lernen und diese auch verknüpfen müssen, welche ich nie zuvor getan habe. Rückblinkend möchte ich stolz sein
 auf das was wir kreiert haben. 
+
+Leon:
+Da dies meine erste Berührung mit der Programmiersprache Python ist, habe ich als Ziel diese Kenntnisse zu vertiefen und lernen wie eine Datenbankanbindung mit einer funktionierenden Web App entiwckelt.
+Zusätzlich ist das mein erstes Projekt, indem ich viel und sinnvoll mit Git und Github arbeiten muss und somit ein realistisches Gefühl, wie ein Entwicklungsprozess in der Arbeitwelt ist, erleben kann.
