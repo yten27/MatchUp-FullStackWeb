@@ -1,0 +1,30 @@
+# ---- Python ----
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ---- Virtual Environment ----
+venv/
+env/
+.venv/
+
+# ---- Flask / Instance Folder ----
+instance/
+*.db
+*.sqlite3
+
+# ---- Logs ----
+*.log
+
+# ---- OS / Editor ----
+.DS_Store
+.vscode/
+.idea/
+
+# ---- Bytecode / Cache ----
+*.py[cod]
+*$py.class
+
+# ---- Pip environment dumps ----
+pip-wheel-metadata/
