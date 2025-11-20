@@ -1,0 +1,29 @@
+<!-- Instanzen werden automatische in die anderen Screens außer Login vererbt, Navigation -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}MatchUp{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+</head>
+<body>
+    <!--Wir haben die in Klassen gemacht um in CSS es einfacher nutzen zu können-->
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="logo-container">
+                <!--Hier kommt die Bilddatei mit dem Logo rein-->
+                <h1 class="logo-text">MatchUp</h1>
+            </div>
+        </div>
+        <!-- Links zu bennenung beim Navigationheader zuweisen, welche zu anderen Seiten führen  -->
+        <ul class="nav-links">
+            <li><a href="/matches">Matches finden</a></li>
+            <li><a href="/meine_spiele">Meine Matches</a></li>
+            <li><a href="/match_erstellen">Spiele erstellen</a></li>
+        </ul>
+
+    </nav>
+
+</body>
+</html>
