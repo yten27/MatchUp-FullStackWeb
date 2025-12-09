@@ -22,8 +22,9 @@ def run_insert_sample():
 
 
 @app.route('/')
+@app.route('/home')
 def home():
-    return render_template("base.html")#ähnlich wie main, lädt base.html grundlayout
+    return render_template("home.html") #ähnlich wie main, lädt base.html grundlayout
 
 #Login
 @app.route('/login')
@@ -36,10 +37,10 @@ def register():#neuen user hier anlegen:
     return render_template("register.html")
 
 #Match-Übersicht   
-@app.route('/match')
-def match():#matches anzeigen die in datenbank hinterlegt wurden
+@app.route('/allmatches')
+def allmatches():#matches anzeigen die in datenbank hinterlegt wurden
     
-    return render_template("match.html")
+    return render_template("allmatches.html")
 
 #Match-Details
 @app.route('/match_details')
