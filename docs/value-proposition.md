@@ -18,16 +18,50 @@ nav_order: 1
 
 ## The problem
 
-[Describe which problem your application tackles and why it is relevant.]
+Feizeitfußballer wollen gerne regelmäßig Fusball spielen, jedoch stehen ihnen folge Probleme oft im weg: 
+•⁠  ⁠Nicht genügend Mitspieler 
+•⁠  ⁠Gruppen zu spontan, chaotisch und unstruktutiert
+•⁠  ⁠unkar wer erscheint und wie Platzpreis aufgeteilt wird 
+
+Es fehlt eine simple und zentrale Lösung, sodass es zu einer strukturierten Fußballpartie führen kann. 
 
 ## Our solution
 
-[Describe why and how your app solves the stated problem. Don't over-promise: the description should match what your app actually delivers.]
+MatchUp wird diese Problematiken beseitigen:
+•⁠  ⁠Nutzer können Matches individuell erstellen, wo sie Ort, Zeit und Anzahl der Spieler angeben können 
+•⁠  ⁠Spieler können sich per einen Klick anmelden 
+•⁠  ⁠In-Echzeit wird angezeigt wie viele Spieler sich angemeldet haben 
+•⁠  ⁠Matches werden übersichtlich angezeigt, der Nutzer sieht seine erstellten games, seine eingetragenen und offene Matches
+•⁠  ⁠Somit werden Spiele strukturiert und klar organisisert 
 
 ## Target user
+•⁠  ⁠Freizeitfußballer 
+•⁠  ⁠kleinene Freundesgruppen 
+•⁠  ⁠PLatz-Hosts
 
-[Scope your target user(s), e.g., with the help of personas.]
 
 ## Customer journey
 
-[Illustrate the customer journey, from the app's entry point to a completed task. You might want to show the customer journey as (schematic) screen flows.]
+1.⁠ ⁠Einstieg
+Der Nutzer öffnet die MatchUp-App und sieht die Homepage.
+2.⁠ ⁠Konto anlegen / Einloggen
+3.⁠ ⁠Matches entdecken
+Auf der Seite „Matches finden“ kann er alle anstehenden Spiele sehen:
+Titel
+Ort
+Uhrzeit
+Anzahl der Teilnehmer
+4.⁠ ⁠Matchdetails ansehen
+Ein Klick auf Details zeigt:
+Beschreibung
+Teilnehmerliste
+5.⁠ ⁠Teilnahme
+Der Nutzer klickt auf „Beitreten“ und wird sofort als Teilnehmer eingetragen.
+6.⁠ ⁠Überblick behalten
+Unter „Meine Matches“ sieht er:
+Matches, die er erstellt hat
+Matches, bei denen er teilnimmt
+7.⁠ ⁠Optional: eigenes Match erstellen
+Über „Spiele erstellen“ kann der Nutzer selbst ein Match definieren (Ort, Zeit, Preis).
+8.⁠ ⁠Fertig
+Er weiß jederzeit, ob genug Spieler dabei sind, wie viel er bezahlen wird und ob das Match stattfindet.
