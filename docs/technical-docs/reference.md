@@ -5,17 +5,11 @@ nav_order: 3
 ---
 
 {: .label }
-[Jane Dane]
+[MatchUP]
 
 {: .no_toc }
 # Reference documentation
 
-{: .attention }
-> This page collects internal functions, routes with their functions, and APIs (if any).
-> 
-> See [Uber](https://developer.uber.com/docs/drivers/references/api) or [PayPal](https://developer.paypal.com/api/rest/) for exemplary high-quality API reference documentation.
->
-> You may delete this `attention` box.
 
 <details open markdown="block">
 {: .text-delta }
@@ -24,62 +18,105 @@ nav_order: 3
 {: toc }
 </details>
 
-## [Section / module]
-
-### `function_definition()`
-
-**Route:** `/route/`
-
-**Methods:** `POST` `GET` `PATCH` `PUT` `DELETE`
-
-**Purpose:** [Short explanation of what the function does and why]
-
-**Sample output:**
-
-[Show an image, string output, or similar illustration -- or write NONE if function generates no output]
-
 ---
 
-## [Example, delete this section] Show to-do lists
+## Route References:
 
-### `get_lists()`
+--- Home 
 
-**Route:** `/lists/`
+**Route:** `/`
+**Route:** `/home`
 
 **Methods:** `GET`
 
-**Purpose:** Show all to-do lists.
+**Purpose:** Weiterleitung auf Home Page
 
-**Sample output:**
+**Sample output:** Kommt noch
 
-![get_lists() sample](../assets/images/fswd-intro_00.png)
+Browser shows: `Browser zeigt das Template `home.html` welches als Einstieg für MatchUP UI dient.`
 
----
+--- Authentifizieren
 
-### `get_list_todos(list_id)`
+**Route:** `/register`
 
-**Route:** `/lists/<int:list_id>`
+**Methods:** `GET`, `POST`
+
+**Purpose:** Regestrierungsformular anzeigen, Regestrierungsdaten verarbeiten & neuen User anlegen
+
+**Sample output:** Kommt noch
+--
+
+**Route:** `/login`
+
+**Methods:** `GET`, `POST`
+
+**Purpose:** Login-Formular anzeigen, Login Daten prüfen & Session setzen
+
+**Sample output:** Kommt noch
+
+--- Match Management
+
+**Route:** `/allmatches`
 
 **Methods:** `GET`
 
-**Purpose:** Retrieve all to-do items of to-do list with ID `list_id` from database and present to user.
+**Purpose:** Anzeige einer Übersicht aller Matches
 
-**Sample output:**
+**Sample output:** Kommt noch
+--
 
-![get_list_todos() sample](../assets/images/fswd-intro_02.png)
-
----
-
-## [Example, delete this section] Insert sample data
-
-### `run_insert_sample()`
-
-**Route:** `/insert/sample`
+**Route:** `/match_detail/<int:match_id>`
 
 **Methods:** `GET`
 
-**Purpose:** Flush the database and insert sample data set
+**Purpose:** Anzeige der Detailinformation zu einem einzelnen Match. In finalen Version soll hier dann auch ein Match beigetreten, verlassen oder gelöscht werden. 
 
-**Sample output:**
+**Sample output:** Kommt noch
+--
 
-Browser shows: `Database flushed and populated with some sample data.`
+Browser zeigt das Template `allmatches.html` mit einer Liste von Matches 
+
+**Route:** `/matches/create`
+
+**Methods:** `GET`, `POST`
+
+**Purpose:** Erstellen eines neuen Matches durch den eingeloggten User. Anzeige eines Formulates zum Erstellen eines Matches und Speichern der Formulardaten in die Datenbank.
+
+**Sample output:** Kommt noch
+--
+
+**Route:** `/my-matches`
+
+**Methods:** `GET`
+
+**Purpose:** Anzeige aller Matches des von den User erstellten und den Matches, welchen er beigetreten ist.
+
+**Sample output:** Kommt noch
+--
+
+**Route:** `/matches/<int:match_id>/join`
+
+**Methods:** `POST`
+
+**Purpose:** Fügt den aktuell eingeloggten User als Teilnehmer zu einem Match dazu. 
+
+**Sample output:** Kommt noch
+--
+
+**Route:** `/matches/<int:match_id>/join`
+
+**Methods:** `POST`
+
+**Purpose:** Entfernt den aktuell eingeloggten aus der Teilnehmerliste von dem Match.
+
+**Sample output:** Kommt noch
+--
+
+**Route:** `/matches/<int:match_id>/delete`
+
+**Methods:** `POST`
+
+**Purpose:** Löscht das Match aus der gesamten Datenbank. Nur der Host des Matches soll dazu berechtigt sein
+
+**Sample output:** Kommt noch
+--
