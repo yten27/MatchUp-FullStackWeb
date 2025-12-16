@@ -20,5 +20,35 @@ Match Detail
     <p>Preis pro Person: {{ match.price }} €</p>
     <p>Erstellt von: {{ match.created_by }}</p>
   </div>
-</div>
+  
+  <!--Teilnehmerliste-->
+  <div class="mb-4">
+    <h4>Teilnehmer</h4>
+    <ul>
+        {%Für User in Teilnehmner%}
+        <li>{{user.name}}</li>
+        {%endfor%}
+    </ul>
+  </div>
+
+  
+  <!-- Teilnehmerliste -->
+  <div class="mb-4">
+    <h4>Teilnehmer</h4>
+    <ul>
+      {% for user in participants %}
+        <li>{{ user.name }}</li>
+      {% endfor %}
+    </ul>
+  </div>
 {% endblock %}
+<!-- Teilnehmer Status -->
+<div class="mb-3">
+    {% if is_owner %}
+      <p><strong>Du bist der Host dieses Matches.</strong></p>
+    {% elif is_joined %}
+      <p><strong>Du nimmst an dem Spiel teil.</strong></p>
+    {% else %}
+      <p><strong>Du bist noch nicht beigetreten.</strong></p>
+    {% endif %}
+  </div>
