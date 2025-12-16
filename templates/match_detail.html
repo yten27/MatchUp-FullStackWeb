@@ -4,9 +4,9 @@ Match Detail
 {% endblock %}
 
 {% block content %}
-<div class content%>
+<div class= "content">
     <!--Match Header-->
-    <div class="mb4">
+    <div class="mb-4">
         <h2>{{ match.title }}</h2>
     <p>
       {{ match.location }} <br>
@@ -20,16 +20,8 @@ Match Detail
     <p>Preis pro Person: {{ match.price }} €</p>
     <p>Erstellt von: {{ match.created_by }}</p>
   </div>
-  
-  <!--Teilnehmerliste-->
-  <div class="mb-4">
-    <h4>Teilnehmer</h4>
-    <ul>
-        {%Für User in Teilnehmner%}
-        <li>{{user.name}}</li>
-        {%endfor%}
-    </ul>
-  </div>
+
+  <hr>
 
   
   <!-- Teilnehmerliste -->
@@ -41,7 +33,7 @@ Match Detail
       {% endfor %}
     </ul>
   </div>
-{% endblock %}
+<hr>
 <!-- Teilnehmer Status -->
 <div class="mb-3">
     {% if is_owner %}
@@ -52,3 +44,30 @@ Match Detail
       <p><strong>Du bist noch nicht beigetreten.</strong></p>
     {% endif %}
   </div>
+
+  <!--Buttons-->
+  <div class="mb-4">
+    <!-- Join Button -->
+    {% if not is_joined %}
+      <form method="post" action="{{ url_for('join_match', id=match.id) }}">
+        <button class="btn btn-success">Join</button>
+      </form>
+    {% endif %}
+  
+    <!-- Leave Button -->
+    {% if is_joined and not is_owner %}
+      <form method="post" action="{{ url_for('leave_match', id=match.id) }}">
+        <button class="btn btn-warning">Leave</button>
+      </form>
+    {% endif %}
+  
+    <!-- Cancel Button (for the host) -->
+    {% if is_owner %}
+      <form method="post" action="{{ url_for('cancel_match', id=match.id) }}">
+        <button class="btn btn-danger">Cancel Match</button>
+      </form>
+    {% endif %}
+  </div>
+  <hr>
+  
+  {% endblock %}
