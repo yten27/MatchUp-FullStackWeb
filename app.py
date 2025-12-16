@@ -1,6 +1,9 @@
 import os
 import db
-from flask import Flask, render_template
+import forms
+from flask import Flask, render_template, redirect, url_for, flash, session, request
+from forms import RegisterForm
+
 #Grundgerüst
 
 app = Flask(__name__)
@@ -31,24 +34,55 @@ def login(): #logik: GET + POST
     return render_template("login.html")
 
 #Registrierung
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():#neuen user hier anlegen: GET + POST
-    return render_template("register.html")
+    # 1. Das Formular-Objekt vorbereiten
+    form = forms.RegisterForm()
+    
+    # 2. Die große Entscheidung: Wurde der "Senden"-Knopf gedrückt UND ist alles richtig ausgefüllt?
+    if form.validate_on_submit():
+        db_con = db.get_db_con()
+        
+        # 3. Prüfen: Gibt es die Email schon?
+        existing_user = db_con.execute("SELECT id FROM user WHERE email = ?", [form.email.data]).fetchone()
+        if existing_user:
+            flash('Diese Email ist bereits vergeben.', 'danger')
+            return render_template('register.html', form=form) # Abbruch und zurück zum Formular
+
+        # 4. Speichern (Der eigentliche Job)
+        try:
+            cursor = db_con.execute("INSERT INTO user (email, password) VALUES (?, ?)", 
+                           [form.email.data, form.password.data])
+            db_con.commit()
+            
+            # 5. Auto-Login (Session)
+            new_user_id = cursor.lastrowid
+            session['user_id'] = new_user_id
+            
+            flash('Erfolg!', 'success')
+            return redirect(url_for('home')) # 6. Weiterleitung zur Startseite
+
+        except Exception as e:
+            flash(f'Fehler: {e}', 'danger')
+
+    # 7. Das passiert ganz am Anfang (GET) ODER wenn Fehler im Formular sind
+    return render_template('register.html', form=form)
 
 #Match-Übersicht   
 @app.route('/allmatches')
 def allmatches():#matches anzeigen die in datenbank hinterlegt wurden, GET
-    
-    return render_template("allmatches.html")
+    matches = db.get_all_matches()
+    return render_template("allmatches.html", matches = matches)
 
 #Match-Details , GET
 @app.route("/matches/<int:match_id>")
 def match_detail(match_id):
     return render_template("match_detail.html", match_id=match_id)
 
-#Create Match, GET + Post 
+#Create Match, GET + POST 
 @app.route("/matches/create")
 def create_match():
+    
     return render_template("create_match.html")
 
 #My Matches anzeigen, GET 

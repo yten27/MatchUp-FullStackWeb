@@ -38,3 +38,11 @@ def insert_sample():
     db_con = get_db_con()
     with current_app.open_resource("sql/insert_sample.sql") as f:
         db_con.executescript(f.read().decode("utf-8"))
+
+# Neue Funktion zum Abrufen aller Matches
+def get_all_matches():
+    db_con = get_db_con()
+    matches = db_con.execute(
+        'SELECT id, title, location, match_time FROM match ORDER BY match_time DESC'
+    ).fetchall()
+    return matches
