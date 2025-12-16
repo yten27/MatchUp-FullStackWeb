@@ -4,5 +4,21 @@ Match Detail
 {% endblock %}
 
 {% block content %}
-This is our content for the Match Details
+<div class content%>
+    <!--Match Header-->
+    <div class="mb4">
+        <h2>{{ match.title }}</h2>
+    <p>
+      {{ match.location }} <br>
+      {{ match.match_time }}
+    </p>
+    </div>
+    <!-- Extra Info-->
+
+</div>
+<div class="mb-4">
+    <p>Preis pro Person: {{ match.price }} €</p>
+    <p>Erstellt von: {{ match.created_by }}</p>
+  </div>
+</div>
 {% endblock %}
