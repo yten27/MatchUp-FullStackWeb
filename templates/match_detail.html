@@ -18,7 +18,7 @@ Match Detail
 </div>
 <div class="mb-4">
     <p>Preis pro Person: {{ match.price }} €</p>
-    <p>Erstellt von: {{ match.created_by }}</p>
+    <p>Erstellt von: {{ match.host_user_id }}</p>
   </div>
 
   <hr>
@@ -49,21 +49,21 @@ Match Detail
   <div class="mb-4">
     <!-- Join Button -->
     {% if not is_joined %}
-      <form method="post" action="{{ url_for('join_match', id=match.id) }}">
+      <form method="post" action="{{ url_for('join_match', match_id=match.id) }}">
         <button class="btn btn-success">Join</button>
       </form>
     {% endif %}
   
     <!-- Leave Button -->
     {% if is_joined and not is_owner %}
-      <form method="post" action="{{ url_for('leave_match', id=match.id) }}">
+      <form method="post" action="{{ url_for('leave_match', match_id=match.id) }}">
         <button class="btn btn-warning">Leave</button>
       </form>
     {% endif %}
   
     <!-- Cancel Button (for the host) -->
     {% if is_owner %}
-      <form method="post" action="{{ url_for('cancel_match', id=match.id) }}">
+      <form method="post" action="{{ url_for('cancel_match', match_id=match.id) }}">
         <button class="btn btn-danger">Cancel Match</button>
       </form>
     {% endif %}

@@ -1,9 +1,32 @@
 import os
 import db
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 #Grundgerüst
 
 app = Flask(__name__)
+
+#Dummy daten für match details 
+current_user = {
+    "id" : 1,
+    "name": "Leon"
+}
+
+matches = {
+  1: {  "id": 1,
+    "title": "Fußball Turnier im Käfig",
+    "location": "Seebenerstraße 16",
+    "match_time": "2025-02-12 17:30",
+    "price": 10,
+    "host_user_id": 1
+  }
+}
+
+participants = {
+    1: [
+        {"id": 1, "name": "Leon"},
+        {"id": 2, "name": "Ayten"}
+    ]
+}
 
 #Für Datenbankanbindung:
 app.config.from_mapping(
@@ -41,10 +64,26 @@ def allmatches():#matches anzeigen die in datenbank hinterlegt wurden, GET
     
     return render_template("allmatches.html")
 
-#Match-Details , GET
+#Match-Details , GET/ Läd machtes und participants/ unterscheidet owner oder joined/rendert detail view
 @app.route("/matches/<int:match_id>")
 def match_detail(match_id):
-    return render_template("match_detail.html", match_id=match_id)
+    match = matches.get(match_id)
+    if not match:
+        return "Match not found", 404
+
+    match_participants = participants.get(match_id, [])
+    is_owner = match["host_user_id"] == current_user["id"]
+    is_joined = any(p["id"] == current_user["id"] for p in match_participants)
+
+    return render_template(
+        "match_detail.html",
+        match=match,
+        participants=match_participants,
+        is_owner=is_owner,
+        is_joined=is_joined
+    )
+
+
 
 #Create Match, GET + Post 
 @app.route("/matches/create")
@@ -56,19 +95,23 @@ def create_match():
 def my_matches():
     return render_template("my_matches.html")
 
-#Join Match , Post
-@app.route("/matches/<int:match_id>/join")
+#Buttons für match interaktion
+
+# Join Match
+@app.route("/matches/<int:match_id>/join", methods=["POST"])
 def join_match(match_id):
-    return render_template("match_detail.html", match_id=match_id)
+    return redirect(url_for("match_detail", match_id=match_id))
 
-#Leave Match , Post
-@app.route("/matches/<int:match_id>/leave")
+
+# Leave Match
+@app.route("/matches/<int:match_id>/leave", methods=["POST"])
 def leave_match(match_id):
-    return render_template("match_detail.html", match_id=match_id)
+    return redirect(url_for("match_detail", match_id=match_id))
 
-#Delete Match , Post, NUR HOST
-@app.route("/matches/<int:match_id>/delete")
-def delete_match(match_id):
-    return render_template("match_detail.html", match_id=match_id)
+
+# Cancel Match (nur Host)
+@app.route("/matches/<int:match_id>/cancel", methods=["POST"])
+def cancel_match(match_id):
+    return redirect(url_for("match_detail", match_id=match_id))
 
 #Nach Aufbau der Seite wird zum Schluss noch die Betragsfunktion, in welcher die Aufteilung des Preises noch geleistet wird
