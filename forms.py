@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, SubmitField, EmailField
+from wtforms import PasswordField, SubmitField, EmailField, StringField, DateTimeLocalField
 from wtforms.validators import InputRequired, Length, EqualTo, Email
 
 class RegisterForm(FlaskForm):
@@ -34,3 +34,20 @@ class LoginForm(FlaskForm):
     ])
     
     submit = SubmitField('Registrieren')
+
+class CreateMatchForm(FlaskForm):
+    title = StringField('Titel / Spielmodus', validators=[
+        InputRequired(),
+        Length(min=3, message="Der Titel ist zu kurz.")
+    ])
+    
+    location = StringField('Ort / Bolzplatz', validators=[
+        InputRequired()
+    ])
+    
+    # format='%Y-%m-%dT%H:%M' ist der Standard-Code für HTML5-Kalender
+    match_time = DateTimeLocalField('Anpfiff', format='%Y-%m-%dT%H:%M', validators=[
+        InputRequired()
+    ])
+    
+    submit = SubmitField('Match erstellen')

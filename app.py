@@ -29,9 +29,42 @@ def home():
     return render_template("home.html") #ähnlich wie main, lädt base.html grundlayout, GET
 
 #Login
-@app.route('/login')
-def login(): #logik: GET + POST
-    return render_template("login.html")
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = forms.LoginForm()
+    
+    if form.validate_on_submit():
+        db_con = db.get_db_con()
+        
+        # Wir suchen den User mit dieser Email
+        # fetchone() gibt uns EINE Zeile zurück oder keine
+        user = db_con.execute("SELECT * FROM user WHERE email = ?", [form.email.data]).fetchone()
+        
+        #   Check:
+        # a Wurde ein User gefunden? (user is not None)
+        # b) Stimmt das Passwort? (user['password'] == Eingabe)
+        if user and user['password'] == form.password.data:
+            
+            # Wenn Korrekt:
+            # Session starten
+            session['user_id'] = user['id']
+            
+            flash('Willkommen zurück!', 'success')
+
+            return redirect(url_for('home'))
+            
+        else:
+            #Entweder Email falsch oder Passwort falsch.
+            flash('Email oder Passwort ist falsch.', 'danger')
+
+    return render_template('login.html', form=form)
+
+@app.route('/logout')
+def logout():
+    # löschen die ID aus der Session)
+    session.pop('user_id', None)
+    flash('Du wurdest ausgewechselt (ausgeloggt).', 'info')
+    return redirect(url_for('login'))
 
 #Registrierung
 @app.route('/register', methods=['GET', 'POST'])
@@ -80,10 +113,45 @@ def match_detail(match_id):
     return render_template("match_detail.html", match_id=match_id)
 
 #Create Match, GET + POST 
-@app.route("/matches/create")
+@app.route("/matches/create", methods=['GET', 'POST'])
 def create_match():
-    
-    return render_template("create_match.html")
+    #Nur eingeloggte User dürfen Matches erstellen!
+    # Ohne Login keine ID -> Absturz.
+    if 'user_id' not in session:
+        flash('Bitte erst einloggen, um ein Match zu erstellen!', 'warning')
+        return redirect(url_for('login'))
+
+    form = forms.CreateMatchForm()
+
+    if form.validate_on_submit():
+        db_con = db.get_db_con()
+        
+        # 2. HOST BESTIMMEN: Wir holen die ID aus der Session
+        current_user_id = session['user_id']
+        
+        # 3. ZEIT FORMATIEREN:
+        # Formular liefert ein Python-Datumsobjekt.
+        # Datenbank erwartet TEXT. Wir wandeln es um in "YYYY-MM-DD HH:MM"
+        time_str = form.match_time.data.strftime('%Y-%m-%d %H:%M')
+
+        try:
+            # 4. SPEICHERN (SQL)
+            # Hier füllen wir exakt deine Tabellen-Spalten:
+            db_con.execute("""
+                INSERT INTO match (title, location, match_time, host_user_id) 
+                VALUES (?, ?, ?, ?)
+            """, [form.title.data, form.location.data, time_str, current_user_id])
+            
+            db_con.commit()
+            
+            flash('Match angepfiffen! Dein Spiel wurde erstellt.', 'success')
+            # Leitet weiter zur Übersicht
+            return redirect(url_for('allmatches'))
+            
+        except Exception as e:
+            flash(f'Foulspiel in der Datenbank: {e}', 'danger')
+ 
+    return render_template("create_match.html", form = form)
 
 #My Matches anzeigen, GET 
 @app.route("/my-matches")
