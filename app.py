@@ -16,7 +16,7 @@ matches = {
     "title": "Fußball Turnier im Käfig",
     "location": "Seebenerstraße 16",
     "match_time": "2025-02-12 17:30",
-    "price": 10,
+    "price": 15,
     "host_user_id": 1
   }
 }
@@ -24,7 +24,9 @@ matches = {
 participants = {
     1: [
         {"id": 1, "name": "Leon"},
-        {"id": 2, "name": "Ayten"}
+        {"id": 2, "name": "Ayten"},
+        {"id": 3, "name": "John"}
+
     ]
 }
 
@@ -72,6 +74,14 @@ def match_detail(match_id):
         return "Match not found", 404
 
     match_participants = participants.get(match_id, [])
+
+    participant_count = len(match_participants)
+    price_per_person = (
+    match["price"] / participant_count
+    if participant_count > 0 else match["price"]
+    )
+
+
     is_owner = match["host_user_id"] == current_user["id"]
     is_joined = any(p["id"] == current_user["id"] for p in match_participants)
 
@@ -80,7 +90,8 @@ def match_detail(match_id):
         match=match,
         participants=match_participants,
         is_owner=is_owner,
-        is_joined=is_joined
+        is_joined=is_joined,
+        price_per_person=price_per_person
     )
 
 
@@ -93,7 +104,21 @@ def create_match():
 #My Matches anzeigen, GET 
 @app.route("/my-matches")
 def my_matches():
-    return render_template("my_matches.html")
+    user_id = current_user["id"]
+    my_matches = []
+
+    for match_id, match in matches.items():
+        is_host = match["host_user_id"] == user_id
+        is_participant = any(
+            p["id"] == user_id
+            for p in participants.get(match_id, [])
+        )
+        if is_host or is_participant:
+            my_matches.append(match)
+            
+
+    return render_template("my_matches.html", matches=my_matches)
+
 
 #Buttons für match interaktion
 

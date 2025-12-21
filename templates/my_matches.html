@@ -1,8 +1,40 @@
 {% extends "base.html" %}
-{% block title %}
-My Matches
-{% endblock %}
+{% block title %}My Matches{% endblock %}
 
 {% block content %}
-This is our content for displaying my Matches
+<h2>My Matches</h2>
+
+{% if matches %}
+  <ul class="list-group">
+    {% for match in matches %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <h5>{{ match.title }}</h5>
+          <small>
+            {{ match.location }} · {{ match.match_time }}
+          </small>
+        </div>
+
+        <div>
+          <!-- Details -->
+          <a href="{{ url_for('match_detail', match_id=match.id) }}"
+             class="btn btn-primary btn-sm">
+            Details
+          </a>
+
+          <!-- Leave (für Teilnehmer sinnvoll, Host-Check optional) -->
+          <form method="post"
+                action="{{ url_for('leave_match', match_id=match.id) }}"
+                style="display:inline;">
+            <button class="btn btn-warning btn-sm">
+              Leave
+            </button>
+          </form>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>Du bist noch keinem Match beigetreten.</p>
+{% endif %}
 {% endblock %}
