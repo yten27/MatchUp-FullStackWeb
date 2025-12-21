@@ -104,20 +104,26 @@ def create_match():
 #My Matches anzeigen, GET 
 @app.route("/my-matches")
 def my_matches():
-    user_id = current_user["id"]
-    my_matches = []
+    created_matches = []
+    joined_matches = []
 
     for match_id, match in matches.items():
-        is_host = match["host_user_id"] == user_id
+        is_owner = match["host_user_id"] == current_user["id"]
         is_participant = any(
-            p["id"] == user_id
+            p["id"] == current_user["id"]
             for p in participants.get(match_id, [])
         )
-        if is_host or is_participant:
+        if is_owner:
+            created_matches.append(match)
+        
+        elif is_participant:
             my_matches.append(match)
             
 
-    return render_template("my_matches.html", matches=my_matches)
+    return render_template("my_matches.html",
+    created_matches=created_matches,
+    joined_matches=joined_matches
+    )
 
 
 #Buttons für match interaktion
