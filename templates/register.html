@@ -1,42 +1,40 @@
-<!DOCTYPE html>
-<html lang="de" data-bs-theme="light">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Matchup | Anpfiff</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <style>
-      html, body {
-        height: 100%;
-        font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      }
-      
-      body {
+{% extends "base.html" %}
+
+{% block title %}MatchUP | Registrierung{% endblock %}
+
+{% block content %}
+
+<style>
+    /* 1. Hintergrund überschreiben (Stadion-Nacht-Look) */
+    body {
+        background: radial-gradient(circle at center, #1e4d2b 0%, #0a2112 100%) !important;
+        min-height: 100vh;
+    }
+
+    /* 2. Container, der den Rest der Seite ausfüllt und zentriert */
+    .register-wrapper {
+        min-height: calc(100vh - 76px); /* Zieht die Navbar-Höhe ab */
         display: flex;
         align-items: center;
-        padding-top: 40px;
-        padding-bottom: 40px;
-        /* Stadion-Atmosphäre: Ein dunkler, grüner Verlauf wie Flutlicht auf Rasen */
-        background: radial-gradient(circle at center, #1e4d2b 0%, #0a2112 100%);
-        color: #333;
-      }
+        justify-content: center;
+        padding: 20px;
+    }
 
-      .login-card {
+    /* 3. Die Karte (identisch zum Login) */
+    .auth-card {
         background: rgba(255, 255, 255, 0.98);
         border-radius: 20px;
         box-shadow: 0 15px 35px rgba(0,0,0,0.4);
         padding: 2.5rem 2rem;
         width: 100%;
         max-width: 400px;
-        margin: auto;
         position: relative;
         overflow: hidden;
-      }
+        text-align: center;
+    }
 
-      /* Dekorativer grüner Balken oben */
-      .login-card::before {
+    /* Grüner Balken oben */
+    .auth-card::before {
         content: "";
         position: absolute;
         top: 0;
@@ -44,74 +42,71 @@
         width: 100%;
         height: 6px;
         background: linear-gradient(90deg, #198754, #a3cfbb);
-      }
+    }
 
-      .logo-icon {
+    /* Icon Styling */
+    .logo-icon {
         font-size: 3rem;
-        margin-bottom: 1rem;
+        color: #198754;
+        margin-bottom: 0.5rem;
         display: inline-block;
-        filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
-      }
+    }
 
-      .form-floating:focus-within { z-index: 5; }
-
-      /* Input Styling passend zum Thema */
-      .form-control {
-        border-color: #dee2e6;
-      }
-      .form-control:focus {
+    /* Input Styling für 3 Felder */
+    .form-control:focus {
         border-color: #198754;
         box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
-      }
+        z-index: 5;
+    }
 
-      /* Deine Logik für zusammenhängende Felder */
-      .top-field {
+    .top-field {
         margin-bottom: -1px;
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
-      }
-      
-      .middle-field {
+    }
+    
+    .middle-field {
         margin-bottom: -1px;
         border-radius: 0;
-      }
+    }
 
-      .bottom-field {
-        margin-bottom: 20px; /* Etwas mehr Abstand zum Button */
+    .bottom-field {
+        margin-bottom: 20px;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
-      }
+    }
 
-      .btn-football {
+    /* Button Styling */
+    .btn-football {
         background-color: #198754;
         border: none;
         font-weight: 700;
-        letter-spacing: 0.5px;
-        transition: all 0.2s;
-      }
-      
-      .btn-football:hover {
+        transition: transform 0.2s;
+    }
+    .btn-football:hover {
         background-color: #146c43;
         transform: scale(1.02);
-      }
-    </style>
-  </head>
-  
-  <body class="text-center">
-    
-    <main class="login-card">
+    }
+</style>
+
+<div class="register-wrapper">
+    <main class="auth-card">
       <form method="POST" action="{{ url_for('register') }}">
         {{ form.csrf_token }}
         
-        <div class="logo-icon">⚽</div>
+        <div class="logo-icon">
+            <i class="bi bi-clipboard-data-fill"></i>
+        </div>
         
-        <h1 class="h3 mb-1 fw-bold">Werde Teil des Teams</h1>
-        <p class="text-muted mb-4 small">Erstelle deinen Account für Matchup</p>
+        <h1 class="h3 mb-1 fw-bold">Kader beitreten</h1>
+        <p class="text-muted mb-4 small">Erstelle deinen Account</p>
 
         {% with messages = get_flashed_messages(with_categories=true) %}
           {% if messages %}
             {% for category, message in messages %}
-              <div class="alert alert-{{ category }} py-2 text-start small shadow-sm border-0">{{ message }}</div>
+              <div class="alert alert-{{ category }} py-2 text-start small d-flex align-items-center gap-2">
+                <i class="bi bi-info-circle-fill"></i> {{ message }}
+              </div>
             {% endfor %}
           {% endif %}
         {% endwith %}
@@ -143,19 +138,20 @@
           {% else %}
             {{ form.confirm_password(class="form-control bottom-field", placeholder="Passwort") }}
           {% endif %}
-          <label for="confirm_password">Passwort wiederholen</label>
+          <label for="confirm_password">Wiederholen</label>
         </div>
 
-        <button class="btn btn-primary btn-football w-100 py-2 btn-lg" type="submit">Jetzt Anpfiff</button>
+        <button class="btn btn-primary btn-football w-100 py-2 btn-lg shadow-sm" type="submit">
+            Jetzt Anpfiff <i class="bi bi-whistle ms-1"></i>
+        </button>
         
         <div class="mt-4 pt-3 border-top">
-            <small class="text-muted">Du hast schon ein Trikot? <a href="{{ url_for('login') }}" class="text-success fw-bold text-decoration-none">Zum Login</a></small>
+            <small class="text-muted">Schon im Team? <a href="{{ url_for('login') }}" class="text-success fw-bold text-decoration-none">Zum Login</a></small>
         </div>
         
-        <p class="mt-4 mb-0 text-muted small opacity-50">&copy; 2025 Matchup App</p>
+        <p class="mt-4 mb-0 text-muted small opacity-50">&copy; 2025 MatchUP</p>
       </form>
     </main>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
-</html>
+</div>
+
+{% endblock %}
