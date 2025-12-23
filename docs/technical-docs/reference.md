@@ -5,7 +5,7 @@ nav_order: 3
 ---
 
 {: .label }
-MatchUP
+Leon Terencio Otte
 
 {: .no_toc }
 # Reference documentation
@@ -31,7 +31,7 @@ MatchUP
 
 **Purpose:** Weiterleitung auf Home Page
 
-**Sample output:** Kommt noch
+**Sample output:** ![alt text](../assets/images/HomePage.jpg)
 
 Browser shows: `Browser zeigt das Template `home.html` welches als Einstieg für MatchUP UI dient.`
 
