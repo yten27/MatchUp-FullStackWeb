@@ -42,7 +42,11 @@ def insert_sample():
 # Neue Funktion zum Abrufen aller Matches
 def get_all_matches():
     db_con = get_db_con()
-    matches = db_con.execute(
-        'SELECT id, title, location, match_time FROM match ORDER BY match_time DESC'
+    return db_con.execute(
+        """
+        SELECT id, title, location, match_time, price, host_user_id
+        FROM match
+        ORDER BY match_time DESC
+        """
     ).fetchall()
     return matches

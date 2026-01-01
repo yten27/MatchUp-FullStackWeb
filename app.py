@@ -6,6 +6,7 @@ from flask import Flask, render_template, redirect, url_for, flash, session, req
 #Grundgerüst
 
 app = Flask(__name__)
+app.config["DEBUG"] = True
 
 #Für Datenbankanbindung:
 app.config.from_mapping(
@@ -176,11 +177,13 @@ def create_match():
             # 4. SPEICHERN (SQL)
             # Hier füllen wir exakt deine Tabellen-Spalten:
             db_con.execute("""
-                INSERT INTO match (title, location, match_time, host_user_id) 
-                VALUES (?, ?, ?, ?)
-            """, [form.title.data, form.location.data, time_str, current_user_id])
+                INSERT INTO match (title, location, match_time, price, host_user_id) 
+                VALUES (?, ?, ?, ?, ?)
+            """, [form.title.data, form.location.data, time_str, form.price.data, current_user_id])
             
             db_con.commit()
+            print("MATCH SAVED TO DATABASE")
+            flash("Match erfolgreich erstellt!", "success")
             
             flash('Match angepfiffen! Dein Spiel wurde erstellt.', 'success')
             # Leitet weiter zur Übersicht

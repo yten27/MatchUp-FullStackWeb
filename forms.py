@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, SubmitField, EmailField, StringField, DateTimeLocalField
-from wtforms.validators import InputRequired, Length, EqualTo, Email
+from wtforms import PasswordField, SubmitField, EmailField, StringField, DateTimeLocalField, IntegerField
+from wtforms.validators import InputRequired, Length, EqualTo, Email, NumberRange
 
 class RegisterForm(FlaskForm):
     # Email-Validierung prüft auf "@" und "."
@@ -49,5 +49,13 @@ class CreateMatchForm(FlaskForm):
     match_time = DateTimeLocalField('Anpfiff', format='%Y-%m-%dT%H:%M', validators=[
         InputRequired()
     ])
+
+    price = IntegerField(
+        'Gesamtpreis ($)',
+        validators=[
+            InputRequired(),
+            NumberRange(min=0)
+        ]
+    )
     
     submit = SubmitField('Match erstellen')
