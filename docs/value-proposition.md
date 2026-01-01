@@ -18,10 +18,10 @@ nav_order: 1
 
 ## The problem
 
-Feizeitfußballer wollen gerne regelmäßig Fusball spielen, jedoch stehen ihnen folge Probleme oft im weg: 
+Freizeitfußballer wollen gerne regelmäßig Fußball spielen, jedoch stehen ihnen folgende Probleme oft im Weg: 
 •⁠  ⁠Nicht genügend Mitspieler 
 •⁠  ⁠Gruppen zu spontan, chaotisch und unstruktutiert
-•⁠  ⁠unkar wer erscheint und wie Platzpreis aufgeteilt wird 
+•⁠  ⁠unklar wer erscheint und wie Platzpreis aufgeteilt wird 
 
 Es fehlt eine simple und zentrale Lösung, sodass es zu einer strukturierten Fußballpartie führen kann. 
 
@@ -36,8 +36,8 @@ MatchUp wird diese Problematiken beseitigen:
 
 ## Target user
 •⁠  ⁠Freizeitfußballer 
-•⁠  ⁠kleinene Freundesgruppen 
-•⁠  ⁠PLatz-Hosts
+•⁠  ⁠kleinere Freundesgruppen 
+•⁠  ⁠Platz-Hosts
 
 
 ## Customer journey
@@ -46,7 +46,7 @@ MatchUp wird diese Problematiken beseitigen:
 Der Nutzer öffnet die MatchUp-App und sieht die Homepage.
 2.⁠ ⁠Konto anlegen / Einloggen
 3.⁠ ⁠Matches entdecken
-Auf der Seite „Matches finden“ kann er alle anstehenden Spiele sehen:
+Auf der Seite „All Matches“ kann er alle anstehenden Spiele sehen:
 Titel
 Ort
 Uhrzeit

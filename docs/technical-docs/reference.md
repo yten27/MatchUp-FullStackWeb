@@ -5,7 +5,7 @@ nav_order: 3
 ---
 
 {: .label }
-MatchUP
+Leon Terencio Otte
 
 {: .no_toc }
 # Reference documentation
@@ -31,7 +31,7 @@ MatchUP
 
 **Purpose:** Weiterleitung auf Home Page
 
-**Sample output:** Kommt noch
+**Sample output:** ![alt text](../assets/images/HomePage.jpg)
 
 Browser shows: `Browser zeigt das Template `home.html` welches als Einstieg für MatchUP UI dient.`
 
@@ -43,7 +43,7 @@ Browser shows: `Browser zeigt das Template `home.html` welches als Einstieg für
 
 **Purpose:** Regestrierungsformular anzeigen, Regestrierungsdaten verarbeiten & neuen User anlegen
 
-**Sample output:** Kommt noch
+**Sample output:** ![alt text](../assets/images/Register.jpg)
 --
 
 **Route:** `/login`
@@ -52,7 +52,7 @@ Browser shows: `Browser zeigt das Template `home.html` welches als Einstieg für
 
 **Purpose:** Login-Formular anzeigen, Login Daten prüfen & Session setzen
 
-**Sample output:** Kommt noch
+**Sample output:** ![alt text](../assets/images/Login.jpg)
 
 --- Match Management
 
@@ -82,7 +82,7 @@ Browser zeigt das Template `allmatches.html` mit einer Liste von Matches
 
 **Purpose:** Erstellen eines neuen Matches durch den eingeloggten User. Anzeige eines Formulates zum Erstellen eines Matches und Speichern der Formulardaten in die Datenbank.
 
-**Sample output:** Kommt noch
+**Sample output:** ![alt text](../assets/images/CreateMatch.jpg)
 --
 
 **Route:** `/my-matches`

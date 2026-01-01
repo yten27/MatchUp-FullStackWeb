@@ -1,8 +1,51 @@
 {% extends "base.html" %}
+
 {% block title %}
 Home Page
 {% endblock %}
 
 {% block content %}
-This is our content for the Homepage
+
+<div style="
+    background-image: url('{{ url_for('static', filename='img/background.jpg') }}');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 90vh;
+    position: relative;
+    width: 100%;
+">
+
+    <div style="
+        background-color: rgba(0, 0, 0, 0.6); /* 60% dunkler Schleier */
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    "></div>
+
+    <div class="container position-relative d-flex flex-column justify-content-center align-items-center h-100 text-center text-white" 
+         style="min-height: 90vh;">
+        
+        <h1 class="display-3 fw-bold mb-3">Willkommen bei MatchUp</h1>
+        
+        <p class="lead mb-4" style="max-width: 600px;">
+            Dein Sport. Dein Team. Dein MatchUp.
+            Erstelle Matches, tritt bei – und leg direkt los.
+        </p>
+        
+        <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+            <a href="{{ url_for('allmatches') }}" class="btn btn-primary btn-lg px-4 gap-3">
+                Matches ansehen
+            </a>
+            
+            <a href="{{ url_for('create_match') }}" class="btn btn-outline-light btn-lg px-4">
+                Match erstellen
+            </a>
+        </div>
+
+    </div>
+</div>
+
 {% endblock %}

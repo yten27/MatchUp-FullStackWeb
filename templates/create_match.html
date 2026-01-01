@@ -1,8 +1,115 @@
-{% extends "base.html" %}
-{% block title %}
-Create Match
-{% endblock %}
+<!DOCTYPE html>
+<html lang="de" data-bs-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MatchUp | Neues Spiel</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+      body {
+        background-color: #f0f2f5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        font-family: 'Segoe UI', sans-serif;
+      }
+      .card-custom {
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        padding: 40px;
+        background: white;
+        max-width: 500px;
+        width: 100%;
+      }
+      .form-control {
+        border-radius: 12px;
+        padding: 12px 15px;
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+      }
+      .form-control:focus {
+        background-color: #fff;
+        box-shadow: 0 0 0 4px rgba(25, 135, 84, 0.15); /* Grüner Fokus */
+        border-color: #198754;
+      }
+      .btn-football {
+        background-color: #198754; /* Rasengrün */
+        color: white;
+        border-radius: 12px;
+        padding: 12px;
+        font-weight: 600;
+        border: none;
+        width: 100%;
+        transition: all 0.2s;
+      }
+      .btn-football:hover {
+        background-color: #146c43;
+        transform: translateY(-2px);
+      }
+      .icon-header { font-size: 3rem; color: #198754; }
+    </style>
+  </head>
+  
+  <body>
+    <div class="card-custom">
+      <div class="text-center mb-4">
+        <i class="bi bi-clipboard-plus-fill icon-header"></i>
+        <h2 class="fw-bold mt-2">Neues Spiel</h2>
+        <p class="text-muted">Organisiere einen Kick und finde Mitspieler.</p>
+      </div>
 
-{% block content %}
-This is our content for creating Matches
-{% endblock %}
+      <form method="POST" action="{{ url_for('create_match') }}">
+        {{ form.csrf_token }}
+
+        <div class="mb-3">
+          <label class="form-label text-muted small fw-bold ms-1">Titel / Modus</label>
+          {% if form.title.errors %}
+            {{ form.title(class="form-control is-invalid", placeholder="z.B. 5 gegen 5 im Park") }}
+          {% else %}
+            {{ form.title(class="form-control", placeholder="z.B. 5 gegen 5 im Park") }}
+          {% endif %}
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label text-muted small fw-bold ms-1">Ort</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light border-0 rounded-start-3"><i class="bi bi-geo-alt text-success"></i></span>
+            {% if form.location.errors %}
+                {{ form.location(class="form-control is-invalid", placeholder="z.B. Bolzplatz Mitte") }}
+            {% else %}
+                {{ form.location(class="form-control", placeholder="z.B. Bolzplatz Mitte") }}
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label text-muted small fw-bold ms-1">Anpfiff</label>
+          <div class="input-group">
+             <span class="input-group-text bg-light border-0 rounded-start-3"><i class="bi bi-calendar-event text-success"></i></span>
+            {% if form.match_time.errors %}
+                {{ form.match_time(class="form-control is-invalid") }}
+            {% else %}
+                {{ form.match_time(class="form-control") }}
+            {% endif %}
+          </div>
+        </div>
+
+        <button class="btn btn-football" type="submit">
+            <i class="bi bi-whistle me-2"></i> Match erstellen
+        </button>
+        
+        <div class="mt-4 text-center">
+            <a href="{{ url_for('allmatches') }}" class="text-muted text-decoration-none small">
+                <i class="bi bi-arrow-left"></i> Zurück zur Übersicht
+            </a>
+        </div>
+      </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

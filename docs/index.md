@@ -3,11 +3,6 @@ title: Home
 nav_order: 0
 ---
 
-{: .attention }
-> Any text enclosed by `[ ]` are placeholders, including the opening and closing brackets.
->
-> You may delete this `attention` box.
-
 # MatchUP
 
 Eine App, mit der Spieler unkompliziert Fußballmatches finden, hosten und beitreten können. Sie soll es erleichtern, spontan oder geplant Spiele mit anderen zu organisieren.
@@ -17,10 +12,11 @@ Eine App, mit der Spieler unkompliziert Fußballmatches finden, hosten und beitr
 ### Leon Terencio Otte
 
 About
-: Some info about Leon
+: Verantwortlich für das technische Grundgerüst (Base/Layout) und die Kernfunktionalitäten der App. 
+Das beeinhaltete die Implementierung der Benutzerauthentifizierung (Login/Register) und die Entwicklung der Workflows: Erstellen und Anzeigen von Spielen (Home, Create Match, AllMatches).
 
 Matr.-Nr.
-: 1234567
+: 77209838726
 
 ### Ayten Teshome
 

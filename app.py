@@ -1,6 +1,8 @@
 import os
 import db
-from flask import Flask, render_template, redirect, url_for
+import forms
+from flask import Flask, render_template, redirect, url_for, flash, session, request
+
 #Grundgerüst
 
 app = Flask(__name__)
@@ -26,20 +28,83 @@ def home():
     return render_template("home.html") #ähnlich wie main, lädt base.html grundlayout, GET
 
 #Login
-@app.route('/login')
-def login(): #logik: GET + POST
-    return render_template("login.html")
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = forms.LoginForm()
+    
+    if form.validate_on_submit():
+        db_con = db.get_db_con()
+        
+        # Wir suchen den User mit dieser Email
+        # fetchone() gibt uns EINE Zeile zurück oder keine
+        user = db_con.execute("SELECT * FROM user WHERE email = ?", [form.email.data]).fetchone()
+        
+        #   Check:
+        # a Wurde ein User gefunden? (user is not None)
+        # b) Stimmt das Passwort? (user['password'] == Eingabe)
+        if user and user['password'] == form.password.data:
+            
+            # Wenn Korrekt:
+            # Session starten
+            session['user_id'] = user['id']
+            
+            flash('Willkommen zurück!', 'success')
+
+            return redirect(url_for('home'))
+            
+        else:
+            #Entweder Email falsch oder Passwort falsch.
+            flash('Email oder Passwort ist falsch.', 'danger')
+
+    return render_template('login.html', form=form)
+
+@app.route('/logout')
+def logout():
+    # löschen die ID aus der Session)
+    session.pop('user_id', None)
+    flash('Du wurdest ausgewechselt (ausgeloggt).', 'info')
+    return redirect(url_for('login'))
 
 #Registrierung
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():#neuen user hier anlegen: GET + POST
-    return render_template("register.html")
+    # 1. Das Formular-Objekt vorbereiten
+    form = forms.RegisterForm()
+    
+    # 2. Die große Entscheidung: Wurde der "Senden"-Knopf gedrückt UND ist alles richtig ausgefüllt?
+    if form.validate_on_submit():
+        db_con = db.get_db_con()
+        
+        # 3. Prüfen: Gibt es die Email schon?
+        existing_user = db_con.execute("SELECT id FROM user WHERE email = ?", [form.email.data]).fetchone()
+        if existing_user:
+            flash('Diese Email ist bereits vergeben.', 'danger')
+            return render_template('register.html', form=form) # Abbruch und zurück zum Formular
+
+        # 4. Speichern (Der eigentliche Job)
+        try:
+            cursor = db_con.execute("INSERT INTO user (email, password) VALUES (?, ?)", 
+                           [form.email.data, form.password.data])
+            db_con.commit()
+            
+            # 5. Auto-Login (Session)
+            new_user_id = cursor.lastrowid
+            session['user_id'] = new_user_id
+            
+            flash('Erfolg!', 'success')
+            return redirect(url_for('home')) # 6. Weiterleitung zur Startseite
+
+        except Exception as e:
+            flash(f'Fehler: {e}', 'danger')
+
+    # 7. Das passiert ganz am Anfang (GET) ODER wenn Fehler im Formular sind
+    return render_template('register.html', form=form)
 
 #Match-Übersicht   
 @app.route('/allmatches')
 def allmatches():#matches anzeigen die in datenbank hinterlegt wurden, GET
-    
-    return render_template("allmatches.html")
+    matches = db.get_all_matches()
+    return render_template("allmatches.html", matches = matches)
 
 #Match-Details , GET/ Läd machtes und participants/ unterscheidet owner oder joined/rendert detail view
 @app.route("/matches/<int:match_id>")
@@ -85,33 +150,80 @@ def match_detail(match_id):
     )
 
 
-#Create Match, GET + Post 
-@app.route("/matches/create")
+#Create Match, GET + POST 
+@app.route("/matches/create", methods=['GET', 'POST'])
 def create_match():
-    return render_template("create_match.html")
+    #Nur eingeloggte User dürfen Matches erstellen!
+    # Ohne Login keine ID -> Absturz.
+    if 'user_id' not in session:
+        flash('Bitte erst einloggen, um ein Match zu erstellen!', 'warning')
+        return redirect(url_for('login'))
+
+    form = forms.CreateMatchForm()
+
+    if form.validate_on_submit():
+        db_con = db.get_db_con()
+        
+        # 2. HOST BESTIMMEN: Wir holen die ID aus der Session
+        current_user_id = session['user_id']
+        
+        # 3. ZEIT FORMATIEREN:
+        # Formular liefert ein Python-Datumsobjekt.
+        # Datenbank erwartet TEXT. Wir wandeln es um in "YYYY-MM-DD HH:MM"
+        time_str = form.match_time.data.strftime('%Y-%m-%d %H:%M')
+
+        try:
+            # 4. SPEICHERN (SQL)
+            # Hier füllen wir exakt deine Tabellen-Spalten:
+            db_con.execute("""
+                INSERT INTO match (title, location, match_time, host_user_id) 
+                VALUES (?, ?, ?, ?)
+            """, [form.title.data, form.location.data, time_str, current_user_id])
+            
+            db_con.commit()
+            
+            flash('Match angepfiffen! Dein Spiel wurde erstellt.', 'success')
+            # Leitet weiter zur Übersicht
+            return redirect(url_for('allmatches'))
+            
+        except Exception as e:
+            flash(f'Foulspiel in der Datenbank: {e}', 'danger')
+ 
+    return render_template("create_match.html", form = form)
 
 #My Matches anzeigen, GET 
 @app.route("/my-matches")
 def my_matches():
+    if "user_id" not in session:
+        flash("Bitte einloggen, um deine Matches zu sehen.", "warning")
+        return redirect(url_for("login"))
+
+    db_con = db.get_db_con()
+    current_user_id = session["user_id"]
+
+    rows = db_con.execute(
+        """
+        SELECT DISTINCT m.*
+        FROM match m
+        LEFT JOIN match_participant mp ON m.id = mp.match_id
+        WHERE m.host_user_id = ? OR mp.user_id = ?
+        """,
+        (current_user_id, current_user_id)
+    ).fetchall()
+
     created_matches = []
     joined_matches = []
 
-    for match_id, match in matches.items():
-        is_owner = match["host_user_id"] == current_user["id"]
-        is_participant = any(
-            p["id"] == current_user["id"]
-            for p in participants.get(match_id, [])
-        )
-        if is_owner:
+    for match in rows:
+        if match["host_user_id"] == current_user_id:
             created_matches.append(match)
-        
-        elif is_participant:
-            my_matches.append(match)
-            
+        else:
+            joined_matches.append(match)
 
-    return render_template("my_matches.html",
-    created_matches=created_matches,
-    joined_matches=joined_matches
+    return render_template(
+        "my_matches.html",
+        created_matches=created_matches,
+        joined_matches=joined_matches
     )
 
 

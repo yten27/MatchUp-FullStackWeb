@@ -4,7 +4,7 @@ nav_order: 3
 ---
 
 {: .label }
-[Jane Dane]
+[Leon Terencio Otte]
 
 {: .no_toc }
 # Design decisions
@@ -16,27 +16,48 @@ nav_order: 3
 {: toc }
 </details>
 
-## 01: [Title]
+## 01: [Frontend Styling Framework - Bootstrap & AI Support]
 
 ### Meta
 
 Status
-: **Work in progress** - Decided - Obsolete
+: Work in progress - **Decided** - Obsolete
 
 Updated
-: DD-MMM-YYYY
+: 23-12-2025
 
 ### Problem statement
 
 [Describe the problem to be solved or the goal to be achieved. Include relevant context information.]
 
+Unser Projektfokus liegt klar auf der Implementierung der Backend-Logik (Python mit Flask). Da wir begrenzte Zeit haben, wollen wir das Design nicht als Priorität definieren. Gleichzeitig soll die App aber nicht wie eine 08/15 Standard Vorlage aussehen, sondern durch und durch nach Fußball aussehen, ohne dass wir wochenlang CSS schreiben müssen.
+
 ### Decision
 
 [Describe **which** design decision was taken for **what reason** and by **whom**.]
 
+*Wir kombinieren Bootstrap 5 mit KI-gestützter Anpassung.**
+
+1.  **Basis (Bootstrap):** Wir nutzen das Framework für das grobe Layout und funktionale Komponenten (Forms, Buttons, Navigationsleiste). Das spart uns die Arbeit für die Grundstruktur.
+2.  **Anpassung (KI-Support):** Um Zeit zu sparen, haben wir KI-Tools genutzt (Gemini), um spezifische CSS-Anpassungen (Custom CSS) zu generieren. Anstatt CSS-Klassen manuell nachzuschlagen, ließen wir uns Code-Snippets für Farbschemata und das Styling erstellen. [[Link zur kompletten Chatverlauf mit Gemini]]
+
+**Vorteil:** Wir konnten uns auf den Python-Code konzentrieren, haben aber trotzdem ein sauber gestyltes Frontend, das über den Standard-Look hinausgeht.
+
+**Decision was taken by:** github/leongit11
+
 ### Regarded options
 
 [Describe any possible design decision that will solve the problem. Assess these options, e.g., via a simple pro/con list.]
+
+1.  **Custom CSS (Alles selbst schreiben)**
+2.  **Bootstrap Standard (Ohne Anpassung)**
+3.  **Bootstrap + KI-Assistenz**
+
+| Criterion | Custom CSS | Bootstrap Standard | Bootstrap + KI |
+| :--- | :--- | :--- | :--- |
+| **Entwicklungsdauer** | ❌ Langsam | ✔️ Sehr schnell | ✔️ Sehr schnell |
+| **Individualität** | ✔️ Hoch | ❌ Niedrig (Generisch) | ✔️ Mittel/Gut |
+| **Aufwand** | ❌ Hoch | ✔️ Minimal | ✔️ Gering |
 
 ---
 
