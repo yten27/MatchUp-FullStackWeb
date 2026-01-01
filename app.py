@@ -5,31 +5,6 @@ from flask import Flask, render_template, redirect, url_for
 
 app = Flask(__name__)
 
-#Dummy daten für match details 
-current_user = {
-    "id" : 1,
-    "name": "Leon"
-}
-
-matches = {
-  1: {  "id": 1,
-    "title": "Fußball Turnier im Käfig",
-    "location": "Seebenerstraße 16",
-    "match_time": "2025-02-12 17:30",
-    "price": 15,
-    "host_user_id": 1
-  }
-}
-
-participants = {
-    1: [
-        {"id": 1, "name": "Leon"},
-        {"id": 2, "name": "Ayten"},
-        {"id": 3, "name": "John"}
-
-    ]
-}
-
 #Für Datenbankanbindung:
 app.config.from_mapping(
     SECRET_KEY='secret_key_just_for_dev_environment',
@@ -69,31 +44,45 @@ def allmatches():#matches anzeigen die in datenbank hinterlegt wurden, GET
 #Match-Details , GET/ Läd machtes und participants/ unterscheidet owner oder joined/rendert detail view
 @app.route("/matches/<int:match_id>")
 def match_detail(match_id):
-    match = matches.get(match_id)
+    db_con = db.get_db_con()
+
+    match = db_con.execute(
+        "SELECT * FROM match WHERE id = ?",
+        (match_id,)
+    ).fetchone()
+
     if not match:
         return "Match not found", 404
 
-    match_participants = participants.get(match_id, [])
+    participants = db_con.execute(
+        """
+        SELECT u.id, u.email
+        FROM user u
+        JOIN match_participant mp ON u.id = mp.user_id
+        WHERE mp.match_id = ?
+        """,
+        (match_id,)
+    ).fetchall()
 
-    participant_count = len(match_participants)
+    participant_count = len(participants)
     price_per_person = (
-    match["price"] / participant_count
-    if participant_count > 0 else match["price"]
+        match["price"] / participant_count
+        if participant_count > 0 else match["price"]
     )
 
+    current_user_id = session.get("user_id")
 
-    is_owner = match["host_user_id"] == current_user["id"]
-    is_joined = any(p["id"] == current_user["id"] for p in match_participants)
+    is_owner = current_user_id == match["host_user_id"]
+    is_joined = any(p["id"] == current_user_id for p in participants)
 
     return render_template(
         "match_detail.html",
         match=match,
-        participants=match_participants,
+        participants=participants,
         is_owner=is_owner,
         is_joined=is_joined,
         price_per_person=price_per_person
     )
-
 
 
 #Create Match, GET + Post 
@@ -131,18 +120,40 @@ def my_matches():
 # Join Match
 @app.route("/matches/<int:match_id>/join", methods=["POST"])
 def join_match(match_id):
+    db_con = db.get_db_con()
+    current_user_id = session["user_id"]
+
+    db_con.execute(
+        "INSERT INTO match_participant (user_id, match_id) VALUES (?, ?)",
+        (current_user_id, match_id)
+    )
+    db_con.commit()
+
     return redirect(url_for("match_detail", match_id=match_id))
-
-
 # Leave Match
 @app.route("/matches/<int:match_id>/leave", methods=["POST"])
 def leave_match(match_id):
+    db_con = db.get_db_con()
+    current_user_id = session["user_id"]
+
+    db_con.execute(
+        "DELETE FROM match_participant WHERE user_id = ? AND match_id = ?",
+        (current_user_id, match_id)
+    )
+    db_con.commit()
+
     return redirect(url_for("match_detail", match_id=match_id))
-
-
 # Cancel Match (nur Host)
 @app.route("/matches/<int:match_id>/cancel", methods=["POST"])
 def cancel_match(match_id):
-    return redirect(url_for("match_detail", match_id=match_id))
+    db_con = db.get_db_con()
+    current_user_id = session["user_id"]
 
+    db_con.execute(
+        "DELETE FROM match WHERE id = ? AND host_user_id = ?",
+        (match_id, current_user_id)
+    )
+    db_con.commit()
+
+    return redirect(url_for("my_matches"))
 #Nach Aufbau der Seite wird zum Schluss noch die Betragsfunktion, in welcher die Aufteilung des Preises noch geleistet wird
