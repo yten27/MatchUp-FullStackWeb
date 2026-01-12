@@ -11,20 +11,21 @@ My Matches
   <!-- Erstellte Matches -->
   <div class="mb-4">
     <h4>Erstellte Matches</h4>
-
+<!-- Matches angezeigt bei denen User Host ist-->
     {% if created_matches %}
+    <!-- Match Infos anzeigen-->
       <ul>
         {% for match in created_matches %}
           <li class="mb-3">
             <strong>{{ match.title }}</strong><br>
             {{ match.location }}<br>
             {{ match.match_time }}<br><br>
-
+    <!-- Match Details seite anzeigen -->
             <a href="{{ url_for('match_detail', match_id=match.id) }}"
                class="btn btn-primary btn-sm">
               Details
             </a>
-
+    <!-- Für den Host wird cancel option angezeigt -->
             <form method="post"
                   action="{{ url_for('cancel_match', match_id=match.id) }}"
                   style="display:inline;">
@@ -36,6 +37,7 @@ My Matches
         {% endfor %}
       </ul>
     {% else %}
+    <!-- Falls das nicht zutrifft -> User hat kein Match erstellt-->
       <p>Keine erstellten Matches.</p>
     {% endif %}
   </div>
@@ -45,20 +47,21 @@ My Matches
   <!-- Beigetretene Matches -->
   <div class="mb-4">
     <h4>Beigetretene Matches</h4>
-
+<!-- Matches bei denen User Teilnehmer ist werden angezeigt-->
     {% if joined_matches %}
       <ul>
+        <!-- Match Info anzeigen -->
         {% for match in joined_matches %}
           <li class="mb-3">
             <strong>{{ match.title }}</strong><br>
             {{ match.location }}<br>
             {{ match.match_time }}<br><br>
-
+        <!-- Match Detailseite-->
             <a href="{{ url_for('match_detail', match_id=match.id) }}"
                class="btn btn-primary btn-sm">
               Details
             </a>
-
+        <!-- Leave Button nur für Teilnehmer angezeigt-->    
             <form method="post"
                   action="{{ url_for('leave_match', match_id=match.id) }}"
                   style="display:inline;">
@@ -70,6 +73,7 @@ My Matches
         {% endfor %}
       </ul>
     {% else %}
+    <!-- Falls nicht zutrifft -> noch keinem Match beigetreten-->
       <p>Du bist noch keinem Match beigetreten.</p>
     {% endif %}
   </div>
