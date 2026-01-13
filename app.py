@@ -245,6 +245,9 @@ def my_matches():
 
 @app.route("/matches/<int:match_id>/join", methods=["POST"])
 def join_match(match_id):
+    if "user_id" not in session:
+        flash("Bitte einloggen, um einem Match beizutreten.", "warning")
+        return redirect(url_for("login"))
     db_con = db.get_db_con()
     current_user_id = session["user_id"]
 # fügt Teilnehmner in Match hinzu 

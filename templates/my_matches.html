@@ -4,79 +4,129 @@ My Matches
 {% endblock %}
 
 {% block content %}
-<div class="content">
 
-  <h2>My Matches</h2>
+<style>
+  .my-header {
+    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+    color: white;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+  }
+
+  .match-box {
+    border: none;
+    border-radius: 12px;
+    background: #fff;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .match-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+  }
+
+  .section-title {
+    font-weight: 700;
+  }
+
+  .soft-divider {
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+</style>
+
+<div class="container py-4">
+
+  <!-- Seitenkopf -->
+  <div class="my-header p-4 shadow-sm d-flex justify-content-between align-items-center">
+    <div>
+      <h1 class="h3 mb-0 fw-bold">🎮 My Matches</h1>
+      <p class="mb-0 opacity-75 small">Deine erstellten & beigetretenen Spiele</p>
+    </div>
+    <a href="{{ url_for('allmatches') }}" class="btn btn-light fw-bold shadow-sm">
+      Alle Matches
+    </a>
+  </div>
 
   <!-- Erstellte Matches -->
-  <div class="mb-4">
-    <h4>Erstellte Matches</h4>
-<!-- Matches angezeigt bei denen User Host ist-->
+  <div class="mb-5">
+    <h4 class="section-title mb-3">Erstellte Matches</h4>
+
     {% if created_matches %}
-    <!-- Match Infos anzeigen-->
-      <ul>
+      <div class="d-flex flex-column gap-3">
         {% for match in created_matches %}
-          <li class="mb-3">
-            <strong>{{ match.title }}</strong><br>
-            {{ match.location }}<br>
-            {{ match.match_time }}<br><br>
-    <!-- Match Details seite anzeigen -->
-            <a href="{{ url_for('match_detail', match_id=match.id) }}"
-               class="btn btn-primary btn-sm">
-              Details
-            </a>
-    <!-- Für den Host wird cancel option angezeigt -->
-            <form method="post"
-                  action="{{ url_for('cancel_match', match_id=match.id) }}"
-                  style="display:inline;">
-              <button class="btn btn-danger btn-sm">
-                Cancel Match
-              </button>
-            </form>
-          </li>
+          <div class="card match-box shadow-sm p-3">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <strong>{{ match.title }}</strong><br>
+                <span class="text-muted small">
+                  {{ match.location }}<br>
+                  {{ match.match_time }}
+                </span>
+              </div>
+
+              <span class="badge text-bg-success">Host</span>
+            </div>
+
+            <div class="mt-3 d-flex gap-2">
+              <a href="{{ url_for('match_detail', match_id=match.id) }}"
+                 class="btn btn-primary btn-sm">
+                Details
+              </a>
+
+              <form method="post"
+                    action="{{ url_for('cancel_match', match_id=match.id) }}">
+                <button class="btn btn-danger btn-sm">
+                  Cancel Match
+                </button>
+              </form>
+            </div>
+          </div>
         {% endfor %}
-      </ul>
+      </div>
     {% else %}
-    <!-- Falls das nicht zutrifft -> User hat kein Match erstellt-->
-      <p>Keine erstellten Matches.</p>
+      <p class="text-muted">Keine erstellten Matches.</p>
     {% endif %}
   </div>
 
-  <hr>
+  <hr class="soft-divider">
 
   <!-- Beigetretene Matches -->
-  <div class="mb-4">
-    <h4>Beigetretene Matches</h4>
-<!-- Matches bei denen User Teilnehmer ist werden angezeigt-->
+  <div class="mb-4 mt-5">
+    <h4 class="section-title mb-3">Beigetretene Matches</h4>
+
     {% if joined_matches %}
-      <ul>
-        <!-- Match Info anzeigen -->
+      <div class="d-flex flex-column gap-3">
         {% for match in joined_matches %}
-          <li class="mb-3">
-            <strong>{{ match.title }}</strong><br>
-            {{ match.location }}<br>
-            {{ match.match_time }}<br><br>
-        <!-- Match Detailseite-->
-            <a href="{{ url_for('match_detail', match_id=match.id) }}"
-               class="btn btn-primary btn-sm">
-              Details
-            </a>
-        <!-- Leave Button nur für Teilnehmer angezeigt-->    
-            <form method="post"
-                  action="{{ url_for('leave_match', match_id=match.id) }}"
-                  style="display:inline;">
-              <button class="btn btn-warning btn-sm">
-                Leave
-              </button>
-            </form>
-          </li>
+          <div class="card match-box shadow-sm p-3">
+            <div>
+              <strong>{{ match.title }}</strong><br>
+              <span class="text-muted small">
+                {{ match.location }}<br>
+                {{ match.match_time }}
+              </span>
+            </div>
+
+            <div class="mt-3 d-flex gap-2">
+              <a href="{{ url_for('match_detail', match_id=match.id) }}"
+                 class="btn btn-primary btn-sm">
+                Details
+              </a>
+
+              <form method="post"
+                    action="{{ url_for('leave_match', match_id=match.id) }}">
+                <button class="btn btn-warning btn-sm">
+                  Leave
+                </button>
+              </form>
+            </div>
+          </div>
         {% endfor %}
-      </ul>
+      </div>
     {% else %}
-    <!-- Falls nicht zutrifft -> noch keinem Match beigetreten-->
-      <p>Du bist noch keinem Match beigetreten.</p>
+      <p class="text-muted">Du bist noch keinem Match beigetreten.</p>
     {% endif %}
   </div>
 
 </div>
+
 {% endblock %}

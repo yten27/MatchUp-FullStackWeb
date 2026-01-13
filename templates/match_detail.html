@@ -4,70 +4,124 @@ Match Detail
 {% endblock %}
 
 {% block content %}
-<div class= "content">
-    <!--Match Header-->
-    <div class="mb-4">
-        <h2>{{ match.title }}</h2>
-    <p>
-      {{ match.location }} <br>
-      {{ match.match_time }}
-    </p>
+
+<style>
+  .detail-header {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    color: white;
+    border-radius: 15px;
+    margin-bottom: 1.5rem;
+  }
+
+  .detail-card {
+    border: none;
+    border-radius: 12px;
+    background: #fff;
+    overflow: hidden;
+  }
+
+  .meta-pill {
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .soft-divider {
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+</style>
+
+<div class="container py-4">
+
+  <!-- anderer Header als Allmatches -->
+  <div class="d-flex justify-content-between align-items-center mb-4 detail-header p-4 shadow-sm">
+    <div>
+      <h1 class="h3 mb-0 fw-bold">📌 Match Detail</h1>
+      <p class="mb-0 opacity-75 small">Details & Teilnehmer</p>
     </div>
-    <!-- Extra Info-->
+    <a href="{{ url_for('allmatches') }}" class="btn btn-light fw-bold shadow-sm">
+      ← Übersicht
+    </a>
+  </div>
 
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-8">
+
+      <div class="card detail-card shadow-sm p-4">
+
+        <div class="mb-4">
+          <h2 class="fw-bold mb-2">{{ match.title }}</h2>
+          <p class="text-muted mb-0">
+            {{ match.location }} <br>
+            {{ match.match_time }}
+          </p>
+        </div>
+
+        <div class="mb-4 d-flex flex-wrap gap-2">
+          <span class="badge text-bg-light meta-pill">
+            Preis pro Person: {{ price_per_person }} €
+          </span>
+          <span class="badge text-bg-light meta-pill">
+            Erstellt von: {{ match.host_user_id }}
+          </span>
+        </div>
+
+        <hr class="soft-divider">
+
+        <div class="mb-4">
+          <h4 class="fw-bold mb-3">Teilnehmer</h4>
+          <ul class="list-group">
+            {% for user in participants %}
+              <li class="list-group-item d-flex align-items-center justify-content-between">
+                <span>{{ user.name }}</span>
+                <span class="badge text-bg-secondary">Teilnehmer</span>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <hr class="soft-divider">
+
+        <div class="mb-3">
+          {% if is_owner %}
+            <div class="alert alert-success mb-0">
+              <strong>Du bist der Host dieses Matches.</strong>
+            </div>
+          {% elif is_joined %}
+            <div class="alert alert-primary mb-0">
+              <strong>Du nimmst an dem Spiel teil.</strong>
+            </div>
+          {% else %}
+            <div class="alert alert-warning mb-0">
+              <strong>Du bist noch nicht beigetreten.</strong>
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="mb-4 d-flex flex-wrap gap-2">
+          {% if not is_joined %}
+            <form method="post" action="{{ url_for('join_match', match_id=match.id) }}">
+              <button class="btn btn-success">Join</button>
+            </form>
+          {% endif %}
+
+          {% if is_joined and not is_owner %}
+            <form method="post" action="{{ url_for('leave_match', match_id=match.id) }}">
+              <button class="btn btn-warning">Leave</button>
+            </form>
+          {% endif %}
+
+          {% if is_owner %}
+            <form method="post" action="{{ url_for('cancel_match', match_id=match.id) }}">
+              <button class="btn btn-danger">Cancel Match</button>
+            </form>
+          {% endif %}
+        </div>
+
+        <hr class="soft-divider">
+
+      </div>
+
+    </div>
+  </div>
 </div>
-<div class="mb-4">
-    <p>Preis pro Person: {{ price_per_person }} €</p>
-    <p>Erstellt von: {{ match.host_user_id }}</p>
-  </div>
 
-  <hr>
-
-  
-  <!-- Teilnehmerliste -->
-  <div class="mb-4">
-    <h4>Teilnehmer</h4>
-    <ul>
-      {% for user in participants %}
-        <li>{{ user.name }}</li>
-      {% endfor %}
-    </ul>
-  </div>
-<hr>
-<!-- Teilnehmer Status -->
-<div class="mb-3">
-    {% if is_owner %}
-      <p><strong>Du bist der Host dieses Matches.</strong></p>
-    {% elif is_joined %}
-      <p><strong>Du nimmst an dem Spiel teil.</strong></p>
-    {% else %}
-      <p><strong>Du bist noch nicht beigetreten.</strong></p>
-    {% endif %}
-  </div>
-
-  <!--Buttons-->
-  <div class="mb-4">
-    <!-- Join Button -->
-    {% if not is_joined %}
-      <form method="post" action="{{ url_for('join_match', match_id=match.id) }}">
-        <button class="btn btn-success">Join</button>
-      </form>
-    {% endif %}
-  
-    <!-- Leave Button -->
-    {% if is_joined and not is_owner %}
-      <form method="post" action="{{ url_for('leave_match', match_id=match.id) }}">
-        <button class="btn btn-warning">Leave</button>
-      </form>
-    {% endif %}
-  
-    <!-- Cancel Button (for the host) -->
-    {% if is_owner %}
-      <form method="post" action="{{ url_for('cancel_match', match_id=match.id) }}">
-        <button class="btn btn-danger">Cancel Match</button>
-      </form>
-    {% endif %}
-  </div>
-  <hr>
-  
-  {% endblock %}
+{% endblock %}
