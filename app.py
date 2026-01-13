@@ -245,6 +245,7 @@ def my_matches():
 
 @app.route("/matches/<int:match_id>/join", methods=["POST"])
 def join_match(match_id):
+#debug wenn nicht eingeloggt kein join möglich
     if "user_id" not in session:
         flash("Bitte einloggen, um einem Match beizutreten.", "warning")
         return redirect(url_for("login"))
