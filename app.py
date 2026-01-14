@@ -116,9 +116,16 @@ def allmatches():#matches anzeigen die in datenbank hinterlegt wurden, GET
 def match_detail(match_id):
     db_con = db.get_db_con()
 
-# match anhand von der id laden 
+# match anhand von der id laden + durch JOIN wird auf User Tabelle die email des Host angezeigt
     match = db_con.execute(
-        "SELECT * FROM match WHERE id = ?",
+        """
+        SELECT
+            m.*,
+            u.email AS host_email
+        FROM match m
+        JOIN user u ON m.host_user_id = u.id
+        WHERE m.id = ?
+        """,
         (match_id,)
     ).fetchone()
 
