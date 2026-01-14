@@ -51,7 +51,7 @@ class CreateMatchForm(FlaskForm):
     ])
 
     price = IntegerField(
-        'Gesamtpreis ($)',
+        'Gesamtpreis (€)',
         validators=[
             InputRequired(),
             NumberRange(min=0)
