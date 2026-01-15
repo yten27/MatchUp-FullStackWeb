@@ -55,14 +55,26 @@ Match Detail
           </p>
         </div>
 
-        <div class="mb-4 d-flex flex-wrap gap-2">
-          <span class="badge text-bg-light meta-pill">
-            Preis pro Person: {{ price_per_person }} €
+        <<div class="mb-4">
+          <div class="display-6 fw-bold">
+            {{ price_per_person }} €
+          </div>
+          <div class="text-muted">
+            Preis pro Person
+          </div>
+        </div>
+        
           </span>
           <span class="badge text-bg-light meta-pill">
             Erstellt von: {{ match.host_email}}
           </span>
         </div>
+        {% if match["info"] %}
+        <div class="mt-3 p-3 bg-light rounded">
+        <div class="fw-bold mb-1">Infos</div>
+        <div class="text-muted">{{ match["info"] }}</div>
+      </div>
+  {% endif %}
 
         <hr class="soft-divider">
 

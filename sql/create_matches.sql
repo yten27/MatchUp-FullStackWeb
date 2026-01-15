@@ -10,6 +10,8 @@ CREATE TABLE match (
     location TEXT NOT NULL,
     match_time TEXT NOT NULL,
     price INTEGER NOT NULL,
+    info TEXT,
+    status TEXT NOT NULL DEFAULT 'active',
     host_user_id INTEGER NOT NULL,
     FOREIGN KEY (host_user_id) REFERENCES user (id) ON DELETE CASCADE
 );

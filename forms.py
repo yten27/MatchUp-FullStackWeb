@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, SubmitField, EmailField, StringField, DateTimeLocalField, IntegerField
-from wtforms.validators import InputRequired, Length, EqualTo, Email, NumberRange
+from wtforms import PasswordField, SubmitField, EmailField, StringField, DateTimeLocalField, IntegerField, TextAreaField
+from wtforms.validators import InputRequired, Length, EqualTo, Email, NumberRange, Optional
 
 class RegisterForm(FlaskForm):
     # Email-Validierung prüft auf "@" und "."
@@ -55,7 +55,13 @@ class CreateMatchForm(FlaskForm):
         validators=[
             InputRequired(),
             NumberRange(min=0)
-        ]
+        
+    ])
+
+    info = TextAreaField(
+        "Allgemeine Informationen",
+        validators=
+        [Length(max=500)]
     )
     
     submit = SubmitField('Match erstellen')

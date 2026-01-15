@@ -190,9 +190,9 @@ def create_match():
             # 4. SPEICHERN (SQL)
             # Hier füllen wir exakt deine Tabellen-Spalten:
             db_con.execute("""
-                INSERT INTO match (title, location, match_time, price, host_user_id) 
-                VALUES (?, ?, ?, ?, ?)
-            """, [form.title.data, form.location.data, time_str, form.price.data, current_user_id])
+                INSERT INTO match (title, location, match_time, price, info, host_user_id) 
+                VALUES (?, ?, ?, ?, ?, ?)
+            """, [form.title.data, form.location.data, time_str, form.price.data, form.info.data, current_user_id])
             
             db_con.commit()
             print("MATCH SAVED TO DATABASE")
@@ -204,7 +204,6 @@ def create_match():
             
         except Exception as e:
             flash(f'Foulspiel in der Datenbank: {e}', 'danger')
- 
     return render_template("create_match.html", form = form)
 
 #My Matches anzeigen:
