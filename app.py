@@ -245,6 +245,22 @@ def my_matches():
     )
 
 
+@app.route("/notes", methods=["GET", "POST"])
+def notes():
+    #GET zeigt Notiz Seite, POST speichert die Notiz
+    user_id = session["user_id"]
+    #notiz des passenden user geladen 
+
+    if request.method == "POST": # Auslöser wenn spieler auf speichern drückt
+        content = request.form.get("content", "") # hollt den text aus <textareaname= "content">
+        db.upsert_user_note(user_id, content) # übergibt welche notiz und neuen text, DB entscheidet neu oder update
+        flash("Notizen gespeichert.", "success")
+        return redirect(url_for("notes"))
+
+    content = db.get_user_note(user_id) # läd bestehende notiz, string oder leer
+    return render_template("notes.html", content=content) # übergibt content an html 
+
+
 #Buttons für match interaktion
 
 # Join Match

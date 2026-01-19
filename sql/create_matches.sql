@@ -22,4 +22,11 @@ CREATE TABLE match_participant (
     PRIMARY KEY (user_id, match_id),
     FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE,
     FOREIGN KEY (match_id) REFERENCES match (id) ON DELETE CASCADE
-)
+);
+
+CREATE TABLE note (
+    user_id INTEGER PRIMARY KEY,
+    content TEXT NOT NULL DEFAULT '',
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE
+);

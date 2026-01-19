@@ -98,6 +98,13 @@
                     <a class="nav-link" href="{{ url_for('my_matches') }}">Meine Matches</a>
                 </li>
                 {% endif %}
+                {% if session.get('user_id') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('notes') }}">
+                <i class="bi bi-journal-text me-1"></i> Notizen
+                    </a>
+                </li>
+                {% endif %}
             </ul>
 
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">

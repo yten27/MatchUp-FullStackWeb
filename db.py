@@ -50,3 +50,31 @@ def get_all_matches():
         """
     ).fetchall()
     return matches
+
+def get_user_note(user_id: int) -> str:
+    db_con = get_db_con()
+    #öffnet db verbingung mit user_id und gibt string(text) wieder
+    row = db_con.execute(
+        "SELECT content FROM note WHERE user_id = ?",
+        (user_id,)
+    ).fetchone()#eine zeile oder none
+    #sucht in tabelle Note nur den Text(content) für spezifischen spieler
+    return row["content"] if row else ""
+    #text zurückgeben wenn da, leeren text wenn nicht
+
+def upsert_user_note(user_id: int, content: str) -> None:
+    #Notize speichern oder umschreiben, rückgabe None -> nur DB Operation
+    db_con = get_db_con()
+    db_con.execute(
+        """
+        INSERT INTO note (user_id, content, updated_at)
+        VALUES (?, ?, CURRENT_TIMESTAMP)
+        ON CONFLICT(user_id)
+        DO UPDATE SET content = excluded.content, updated_at = CURRENT_TIMESTAMP
+        """,
+        #wenn keine notiz, neue zeile wird angelegt, updated_at für aktualisierung 
+        # user_id unique, bei neuer notiz kein neuer eintrag sondern aktualisierung(text/zeit überschreibung)
+        (user_id, content)
+    )
+    db_con.commit()
+    # änderung dauerhaft speichern

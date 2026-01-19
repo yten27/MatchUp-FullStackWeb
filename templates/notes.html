@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}
+Notizen
+{% endblock %}
+
+{% block content %}
+
+<style>
+  .notes-header {
+    background: linear-gradient(135deg, #198754 0%, #0f5132 100%);
+    color: white;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+  }
+  .notes-card {
+    border: none;
+    border-radius: 12px;
+    background: #fff;
+    overflow: hidden;
+  }
+  textarea.form-control {
+    min-height: 260px;
+    resize: vertical;
+  }
+</style>
+
+<div class="container py-4">
+
+  <div class="d-flex justify-content-between align-items-center notes-header p-4 shadow-sm">
+    <div>
+      <h1 class="h3 mb-0 fw-bold">📝 Notizen</h1>
+      <p class="mb-0 opacity-75 small">Hier kannst du deine Notizen eintragen, wer dir wie viel geld schuldet oder wann du wo sein musst.</p>
+    </div>
+    <a href="{{ url_for('home') }}" class="btn btn-light fw-bold text-success shadow-sm">
+      ← Home
+    </a>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-8">
+
+      <div class="card notes-card shadow-sm p-4">
+
+        <form method="POST" action="{{ url_for('notes') }}">
+          <div class="mb-3">
+            <label class="form-label fw-bold">Dein Notizblock</label>
+            <textarea name="content" class="form-control" placeholder="Beispiel:
+- Ali schuldet mir 50€
+- Ball mitbringen
+- Teams: ...">{{ content }}</textarea>
+          </div>
+
+          <div class="d-flex gap-2">
+            <button class="btn btn-success fw-bold" type="submit">
+              Speichern
+            </button>
+            <a class="btn btn-outline-secondary" href="{{ url_for('notes') }}">
+              Zurücksetzen
+            </a>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
