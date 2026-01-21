@@ -32,12 +32,6 @@ def init_db():
         db_con.executescript(f.read().decode('utf8'))
     click.echo('Database has been initialized.')
 
-#Testen für Samples ob DB funktioniert
-def insert_sample():
-    #Füllt die Datenbank mit Beispiel-Daten für MatchUp.
-    db_con = get_db_con()
-    with current_app.open_resource("sql/insert_sample.sql") as f:
-        db_con.executescript(f.read().decode("utf-8"))
 
 # Neue Funktion zum Abrufen aller Matches
 def get_all_matches():

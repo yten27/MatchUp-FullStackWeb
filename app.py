@@ -16,12 +16,6 @@ app.config.from_mapping(
 app.cli.add_command(db.init_db)
 app.teardown_appcontext(db.close_db_con)
 
-#Rein für die Testung von DB
-@app.route("/insert/sample")
-def run_insert_sample():
-    db.insert_sample()
-    return "Database flushed and populated with some sample MatchUp data."
-
 
 @app.route('/')
 @app.route('/home')
@@ -210,7 +204,7 @@ def create_match():
 # zeigt erstellte und beigetretene Matches 
 @app.route("/my-matches")
 def my_matches():
-    # Zugriff nur bei eingelogten Usern 
+    # Zugriff nur bei eingelogten Usern, eigentlich nicht nötig da nicht angezeigt
     if "user_id" not in session:
         flash("Bitte einloggen, um deine Matches zu sehen.", "warning")
         return redirect(url_for("login"))
@@ -225,6 +219,7 @@ def my_matches():
         LEFT JOIN match_participant mp ON m.id = mp.match_id
         WHERE m.host_user_id = ? OR mp.user_id = ?
         """,
+        # left join stellt sicher das auch matches ohne teilnehmer angezeigt werden
         (current_user_id, current_user_id)
     ).fetchall()
 
@@ -253,7 +248,7 @@ def notes():
 
     if request.method == "POST": # Auslöser wenn spieler auf speichern drückt
         content = request.form.get("content", "") # hollt den text aus <textareaname= "content">
-        db.upsert_user_note(user_id, content) # übergibt welche notiz und neuen text, DB entscheidet neu oder update
+        db.upsert_user_note(user_id, content) # übergibt welche notiz und neuen text, DB entscheidet insert oder update in einem ducrh upsert
         flash("Notizen gespeichert.", "success")
         return redirect(url_for("notes"))
 
