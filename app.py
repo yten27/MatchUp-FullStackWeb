@@ -134,6 +134,7 @@ def match_detail(match_id):
         JOIN match_participant mp ON u.id = mp.user_id
         WHERE mp.match_id = ?
         """,
+    #Durch join email echte user-infos anzeigen
         (match_id,)
     ).fetchall()
 
@@ -214,12 +215,13 @@ def my_matches():
 # Alle Matches werden aus DB geladen in denen User Host oder Teilnehmer ist 
     rows = db_con.execute(
         """
-        SELECT DISTINCT m.*
+        SELECT DISTINCT m.* 
         FROM match m
         LEFT JOIN match_participant mp ON m.id = mp.match_id
         WHERE m.host_user_id = ? OR mp.user_id = ?
         """,
-        # left join stellt sicher das auch matches ohne teilnehmer angezeigt werden
+        # DISTINCT = nur ein Match anzeigen egal wie viele Teilnehmer
+        # left join stellt sicher das auch matches ohne teilnehmer angezeigt werden (FROM Tabelle voll angezeigt)
         (current_user_id, current_user_id)
     ).fetchall()
 
@@ -232,7 +234,7 @@ def my_matches():
             created_matches.append(match)
         else:
             joined_matches.append(match)
-
+# append. fügt element in liste hinzu, matches werden entweder zu erstellt und beigetreten sortiert
     return render_template(
         "my_matches.html",
         created_matches=created_matches,
@@ -248,7 +250,7 @@ def notes():
 
     if request.method == "POST": # Auslöser wenn spieler auf speichern drückt
         content = request.form.get("content", "") # hollt den text aus <textareaname= "content">
-        db.upsert_user_note(user_id, content) # übergibt welche notiz und neuen text, DB entscheidet insert oder update in einem ducrh upsert
+        db.upsert_user_note(user_id, content) # übergibt notiz an DB, entscheidet insert oder update in einem durch upsert
         flash("Notizen gespeichert.", "success")
         return redirect(url_for("notes"))
 
@@ -302,4 +304,3 @@ def cancel_match(match_id):
     db_con.commit()
 
     return redirect(url_for("my_matches"))
-#Nach Aufbau der Seite wird zum Schluss noch die Betragsfunktion, in welcher die Aufteilung des Preises noch geleistet wird

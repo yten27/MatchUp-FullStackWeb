@@ -66,8 +66,8 @@ def upsert_user_note(user_id: int, content: str) -> None:
         ON CONFLICT(user_id)
         DO UPDATE SET content = excluded.content, updated_at = CURRENT_TIMESTAMP
         """,
-        #wenn keine notiz, neue zeile wird angelegt, updated_at für aktualisierung 
-        # user_id unique, bei neuer notiz kein neuer eintrag sondern aktualisierung(text/zeit überschreibung)
+        #wenn keine notiz, neue zeile wird angelegt, updated_at für aktualisierung (INSERT oder UPDATE)
+        # ON CONFLICT: user_id unique, bei neuer notiz kein neuer eintrag sondern aktualisierung(text/zeit überschreibung)
         (user_id, content)
     )
     db_con.commit()
