@@ -1,6 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, SubmitField, EmailField, StringField, DateTimeLocalField, IntegerField, TextAreaField
 from wtforms.validators import InputRequired, Length, EqualTo, Email, NumberRange, Optional
+from datetime import datetime, timedelta
+from wtforms import ValidationError
 
 class RegisterForm(FlaskForm):
     # Email-Validierung prüft auf "@" und "."
@@ -63,5 +65,11 @@ class CreateMatchForm(FlaskForm):
         validators=
         [Length(max=500)]
     )
+    # Mind. 2std. vor beginn Match erstellen validierung
+    def validate_match_time(self, field):
+        if field.data <= datetime.now() + timedelta(hours=2):
+            raise ValidationError(
+                "Das Match muss mindestens 2 Stunden im Voraus erstellt werden."
+            )
     
     submit = SubmitField('Match erstellen')

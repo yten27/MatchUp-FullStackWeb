@@ -100,11 +100,14 @@
           <label class="form-label text-muted small fw-bold ms-1">Anpfiff</label>
           <div class="input-group">
              <span class="input-group-text bg-light border-0 rounded-start-3"><i class="bi bi-calendar-event text-success"></i></span>
-            {% if form.match_time.errors %}
-                {{ form.match_time(class="form-control is-invalid") }}
-            {% else %}
-                {{ form.match_time(class="form-control") }}
-            {% endif %}
+             {% if form.match_time.errors %}
+             {{ form.match_time(class="form-control is-invalid") }}
+             <div class="invalid-feedback">
+               {{ form.match_time.errors[0] }}
+             </div>
+           {% else %}
+             {{ form.match_time(class="form-control") }}
+           {% endif %}
           </div>
         </div>
 
