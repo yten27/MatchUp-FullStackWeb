@@ -25,6 +25,12 @@ app.config.from_mapping(
 app.cli.add_command(db.init_db)
 app.teardown_appcontext(db.close_db_con)
 
+@app.route('/insert/sample')
+def run_insert_sample():
+    db.insert_sample()
+    return 'Database flushed and populated with some sample data.'
+
+
 def row_to_dict(row):
     return dict(row)
 
