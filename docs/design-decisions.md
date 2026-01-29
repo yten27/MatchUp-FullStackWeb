@@ -61,7 +61,7 @@ Unser Projektfokus liegt klar auf der Implementierung der Backend-Logik (Python 
 
 ---
 
-## [Example, delete this section] 01: How to access the database - SQL or SQLAlchemy 
+## [Example, delete this section] 02: How to delete?(AYTEN, hier fehlt noch was) 
 
 ### Meta
 
@@ -107,3 +107,42 @@ Folgende Optionen wurden evaluiert:
 	1.	Automatisches Löschen von Matches nach Spielende
 	2.	Automatisches Stornieren kurz vor Spielbeginn (z. B. bei zu wenigen Teilnehmern)
 	3.	Zeit- und rollenbasierte Sichtbarkeit (gewählte Lösung)
+
+
+## 03: Forms & Validation - FLASK-WTF & CSRF Protection
+
+### Meta
+
+Status
+: Work in progress - **Decided** - Obsolete
+
+Updated
+: 29-01-2026
+
+### Problem statement
+
+Unsere App hat Eingabeformulare wie z.B. Register, Login und Create Match. Diese sollen möglichst schnell und ordentlich validiert werden. Dazu gehört die Überprüfung für das Email-Format, Passwortlänge oder die Passwort Bestätigung. Wir wollen keine Eingaben aus dem HTML-Formular manuell auslesen und selbst verarbeiten und trotzdem ein gewissen Sicherheitsstandard in die App mit integrieren. Der CSRF Token schützt uns vor CSRF Angriffe bei POST anfragen.
+
+### Decision
+
+**Wir nutzen FLASK-WTF (WTForms) für Formulare und Validierung und aktiven zustätzlich CSRF Schutz**
+
+Wir nutzen als Basis FLASK-WTF mithilfe von WTForms. Das bringt uns ein standardmäßigen CSRF Schutz für Forms über den Token. Unser Vorteil ist damit, dass ein Angreifer nicht im Hintergrund mit einem fremden POST Anfrage, während der User eingeloggt ist, auslösen kann ohne Token.  
+
+**Vorteil:** Damit können wir hier ebenfalls Zeit sparen, da Validierung und Fehlerhandling in einem erledigt werde.
+
+**Decision was taken by:** github/leongit11
+
+
+### Regarded options
+
++ Manuelles Handling
++ WTForms / FLASK ohne CSRF
++ FLASK-WTF mit CSRF
+
+Criterion                     | Manuell (request.form) | Flask-WTF ohne CSRF | Flask-WTF + CSRF
+-----------------------------|-------------------------|---------------------|-----------------
+Entwicklungsdauer            | ❌ Langsam              | ✔️ Schnell          | ✔️ Schnell
+Code-Übersichtlichkeit       | ❌ Eher unübersichtlich | ✔️ Gut              | ✔️ Gut
+Validierung/Fehlermeldungen  | ❌ Viel Handarbeit      | ✔️ Gut              | ✔️ Gut
+Sicherheit (CSRF bei POST)   | ❌ Extra Aufwand        | ❌ Fehlend           | ✔️ Standardmäßig dabei
