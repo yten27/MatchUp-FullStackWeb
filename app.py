@@ -2,9 +2,17 @@ import os
 import db
 import forms
 from flask import Flask, render_template, redirect, url_for, flash, session, request
+from datetime import datetime, timedelta
+#
+def is_visible_for_public(match_time_str: str, hours_after: int = 2) -> bool:
+    # match_time wird als String aus db gelesen
+    match_time = datetime.strptime(match_time_str, "%Y-%m-%d %H:%M")
+    #Zeitpunkt ab dem match nicht angezeigt werden soll
+    cutoff = datetime.now() - timedelta(hours=hours_after)
+    #true oder false
+    return match_time > cutoff
 
 #Grundgerüst
-
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
@@ -98,7 +106,9 @@ def register():#neuen user hier anlegen: GET + POST
 #Match-Übersicht   
 @app.route('/allmatches')
 def allmatches():#matches anzeigen die in datenbank hinterlegt wurden, GET
-    matches = db.get_all_matches()
+    all_matches = db.get_all_matches()
+    #Nut matches anzeigen die 2h im vorraus erstellt wurden, daten bleiben in db vorhanden
+    matches = [m for m in all_matches if is_visible_for_public(m["match_time"], hours_after=2)]
     return render_template("allmatches.html", matches = matches)
 
 #Match-Details:
@@ -231,9 +241,12 @@ def my_matches():
 # Matches aufteilen in erstellte und beigetretene 
     for match in rows:
         if match["host_user_id"] == current_user_id:
+            #host sieht alle matches, falls geld nicht ausgezahlt wurde kann weiterhin kontakt durch mail aufgenommen werden
             created_matches.append(match)
         else:
-            joined_matches.append(match)
+            if is_visible_for_public(match["match_time"], hours_after=2):
+                #teilnehmer sehen nur noch aktuelle, besser übersichtlich
+                joined_matches.append(match)
 # append. fügt element in liste hinzu, matches werden entweder zu erstellt und beigetreten sortiert
     return render_template(
         "my_matches.html",
