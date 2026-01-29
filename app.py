@@ -3,6 +3,7 @@ import db
 import forms
 from flask import Flask, render_template, redirect, url_for, flash, session, request
 from datetime import datetime, timedelta
+from flask import jsonify
 
 def is_visible_for_public(match_time_str: str, hours_after: int = 2) -> bool:
     # match_time wird als String aus db gelesen
@@ -23,6 +24,14 @@ app.config.from_mapping(
 )
 app.cli.add_command(db.init_db)
 app.teardown_appcontext(db.close_db_con)
+
+def row_to_dict(row):
+    return dict(row)
+
+@app.get("/api/matches")
+def api_get_matches():
+    matches = db.get_all_matches()  # liefert list[sqlite3.Row]
+    return jsonify([row_to_dict(m) for m in matches])
 
 
 @app.route('/')
