@@ -62,7 +62,8 @@ Browser shows: `Browser zeigt das Template `home.html` welches als Einstieg für
 
 **Purpose:** Anzeige einer Übersicht aller Matches
 
-**Sample output:** ![alt text](../assets/images/all-matches.jpg)
+**Sample output:** ![alt text](../assets/images/all-matches.png)
+
 -- Match Detail
 
 **Route:** `/match_detail/<int:match_id>`
@@ -83,7 +84,7 @@ Browser zeigt das Template `allmatches.html` mit einer Liste von Matches
 
 **Purpose:** Erstellen eines neuen Matches durch den eingeloggten User. Anzeige eines Formulates zum Erstellen eines Matches und Speichern der Formulardaten in die Datenbank.
 
-**Sample output:** ![alt text](../assets/images/CreateMatch.jpg)
+**Sample output:** ![alt text](../assets/images/CreateMatch.png)
 -- My Matches
 
 **Route:** `/my-matches`
