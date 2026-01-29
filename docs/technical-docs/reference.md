@@ -62,7 +62,7 @@ Browser shows: `Browser zeigt das Template `home.html` welches als Einstieg für
 
 **Purpose:** Anzeige einer Übersicht aller Matches
 
-**Sample output:** Kommt noch
+**Sample output:** 
 --
 
 **Route:** `/match_detail/<int:match_id>`
@@ -71,7 +71,8 @@ Browser shows: `Browser zeigt das Template `home.html` welches als Einstieg für
 
 **Purpose:** Anzeige der Detailinformation zu einem einzelnen Match. In finalen Version soll hier dann auch ein Match beigetreten, verlassen oder gelöscht werden. 
 
-**Sample output:** Kommt noch
+**Sample output:** ![alt text](../assets/images/details.png)
+
 --
 
 Browser zeigt das Template `allmatches.html` mit einer Liste von Matches 
@@ -91,7 +92,7 @@ Browser zeigt das Template `allmatches.html` mit einer Liste von Matches
 
 **Purpose:** Anzeige aller Matches des von den User erstellten und den Matches, welchen er beigetreten ist.
 
-**Sample output:** Kommt noch
+**Sample output:** ![alt text](../assets/images/my-matches.png)
 --
 
 **Route:** `/matches/<int:match_id>/join`
@@ -100,16 +101,16 @@ Browser zeigt das Template `allmatches.html` mit einer Liste von Matches
 
 **Purpose:** Fügt den aktuell eingeloggten User als Teilnehmer zu einem Match dazu. 
 
-**Sample output:** Kommt noch
+**Sample output:** ![alt text](../assets/images/join.png)
 --
 
-**Route:** `/matches/<int:match_id>/join`
+**Route:** `/matches/<int:match_id>/leave`
 
 **Methods:** `POST`
 
 **Purpose:** Entfernt den aktuell eingeloggten aus der Teilnehmerliste von dem Match.
 
-**Sample output:** Kommt noch
+**Sample output:** ![alt text](../assets/images/leave.png)
 --
 
 **Route:** `/matches/<int:match_id>/delete`
@@ -118,5 +119,14 @@ Browser zeigt das Template `allmatches.html` mit einer Liste von Matches
 
 **Purpose:** Löscht das Match aus der gesamten Datenbank. Nur der Host des Matches soll dazu berechtigt sein
 
-**Sample output:** Kommt noch
+**Sample output:** ![alt text](../assets/images/delete.png)
+--
+
+**Route:** `/note`
+
+**Methods:** `GET,POST`
+
+**Purpose:** Ermöglicht es dem User Notizen zu erstellen, anzusehen und speichern.
+
+**Sample output:** ![alt text](../assets/images/notes.png)
 --

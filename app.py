@@ -3,7 +3,7 @@ import db
 import forms
 from flask import Flask, render_template, redirect, url_for, flash, session, request
 from datetime import datetime, timedelta
-#
+
 def is_visible_for_public(match_time_str: str, hours_after: int = 2) -> bool:
     # match_time wird als String aus db gelesen
     match_time = datetime.strptime(match_time_str, "%Y-%m-%d %H:%M")

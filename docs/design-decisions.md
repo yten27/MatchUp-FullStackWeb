@@ -4,7 +4,7 @@ nav_order: 3
 ---
 
 {: .label }
-[Leon Terencio Otte]
+[Leon Terencio Otte, Ayten Teshome]
 
 {: .no_toc }
 # Design decisions
@@ -73,41 +73,37 @@ Updated
 
 ### Problem statement
 
-Should we perform database CRUD (create, read, update, delete) operations by writing plain SQL or by using SQLAlchemy as object-relational mapper?
+Problemstellung
 
-Our web application is written in Python with Flask and connects to an SQLite database. To complete the current project, this setup is sufficient.
-
-We intend to scale up the application later on, since we see substantial business value in it.
+Sollte ein Match vergangen sein, sollte es die All Matches Seite nicht unnötig "zumüllen". Der Host müsste jedoch weiterhin die Möglichkeit haben auf das Match zugriff zu haben, um z.B. offene Rechnungen zu begleichen. Es wurde in betracht gezogen die Matches automatisch zu stornieren, jedoch erwis sich diese Lösung als unötig komplex und würde das Spiel immer noch anzeigen. 
 
 
+Ziel war daher:
+	•	Eine aufgeräumte öffentliche Match-Übersicht
+	•	Planungssicherheit für Teilnehmer
+	•	Volle Kontrolle für Hosts über ihre erstellten Matches
 
-Therefore, we will likely:
-Therefore, we will likely:
-Therefore, we will likely:
 
-+ Change the database schema multiple times along the way, and
-+ Switch to a more capable database system at some point.
 
 ### Decision
 
-We stick with plain SQL.
+Wir haben uns gegen ein automatisches Löschen oder kurzfristiges Stornieren entschieden und stattdessen eine zeit- und rollenbasierte Sichtbarkeitslogik implementiert.
 
-Our team still has to come to grips with various technologies new to us, like Python and CSS. Adding another element to our stack will slow us down at the moment.
+Konkret:
+	•	Mindestens 2 Stunden vor Start muss das Match erstellt werden
+	•	2 Stunden nach Beginn werden Matches:
+	•	aus Match Details entfernt
+	•	aus der Liste der beigetretenen Matches entfernt
+	•	Der Host hat jedoch immer noch die Möglichkeit das Match mit allen Teilnehmern anzurufen bei "erstellten
+    Matches", dort kann er sie manuell löschen 
 
-Also, it is likely we will completely re-write the app after MVP validation. This will create the opportunity to revise tech choices in roughly 4-6 months from now.
-*Decision was taken by:* github.com/joe, github.com/jane, github.com/maxi
+Diese Lösung sorgt für eine saubere Nutzeroberfläche, ohne dem Host wichtige Informationen oder Kontrolle zu entziehen.
+**Decision was taken by:** github/yten27
+
 
 ### Regarded options
 
-We regarded two alternative options:
-
-+ Plain SQL
-+ SQLAlchemy
-
-| Criterion | Plain SQL | SQLAlchemy |
-| --- | --- | --- |
-| **Know-how** | ✔️ We know how to write SQL | ❌ We must learn ORM concept & SQLAlchemy |
-| **Change DB schema** | ❌ SQL scattered across code | ❔ Good: classes, bad: need Alembic on top |
-| **Switch DB engine** | ❌ Different SQL dialect | ✔️ Abstracts away DB engine |
-
----
+Folgende Optionen wurden evaluiert:
+	1.	Automatisches Löschen von Matches nach Spielende
+	2.	Automatisches Stornieren kurz vor Spielbeginn (z. B. bei zu wenigen Teilnehmern)
+	3.	Zeit- und rollenbasierte Sichtbarkeit (gewählte Lösung)

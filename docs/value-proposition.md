@@ -4,7 +4,7 @@ nav_order: 1
 ---
 
 {: .label }
-[Jane Dane]
+[Ayten Teshome]
 
 {: .no_toc }
 # Value proposition
@@ -44,24 +44,31 @@ MatchUp wird diese Problematiken beseitigen:
 
 1.⁠ ⁠Einstieg
 Der Nutzer öffnet die MatchUp-App und sieht die Homepage.
+
 2.⁠ ⁠Konto anlegen / Einloggen
+
 3.⁠ ⁠Matches entdecken
 Auf der Seite „All Matches“ kann er alle anstehenden Spiele sehen:
-Titel
-Ort
+Titel,
+Ort,
 Uhrzeit
-Anzahl der Teilnehmer
+
 4.⁠ ⁠Matchdetails ansehen
 Ein Klick auf Details zeigt:
-Beschreibung
-Teilnehmerliste
+Beschreibung,
+Teilnehmerliste,
+Preis pro Person
+
 5.⁠ ⁠Teilnahme
 Der Nutzer klickt auf „Beitreten“ und wird sofort als Teilnehmer eingetragen.
+
 6.⁠ ⁠Überblick behalten
 Unter „Meine Matches“ sieht er:
 Matches, die er erstellt hat
 Matches, bei denen er teilnimmt
+
 7.⁠ ⁠Optional: eigenes Match erstellen
 Über „Spiele erstellen“ kann der Nutzer selbst ein Match definieren (Ort, Zeit, Preis).
+
 8.⁠ ⁠Fertig
 Er weiß jederzeit, ob genug Spieler dabei sind, wie viel er bezahlen wird und ob das Match stattfindet.
