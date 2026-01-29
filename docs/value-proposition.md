@@ -42,6 +42,8 @@ MatchUp wird diese Problematiken beseitigen:
 
 ## Customer journey
 
+![alt text](assets/images/Blockdiagramm_CustomerJourney.png)
+
 1.⁠ ⁠Einstieg
 Der Nutzer öffnet die MatchUp-App und sieht die Homepage.
 

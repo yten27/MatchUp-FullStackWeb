@@ -16,3 +16,13 @@ nav_order: 2
 + ToC
 {: toc }
 </details>
+
+# Leon Terencio Otte 
+
+## Dokumentation
+- Wichtige technische Entscheidungen kurz dokumentieren („Warum haben wir es so gemacht?“).
+  - besonders für die Design Decisions
+
+## Zusammenarbeit mit GitHub
+- Eine **klare Branch-Strategie** nutzen (z. B. Feature-Branches + Pull Requests) und nicht direkt in `main` arbeiten.
+- Pull Requests konsequenter prüfen und **Merge-Konflikte früh** lösen.

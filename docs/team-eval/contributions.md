@@ -17,12 +17,13 @@ nav_order: 4
 {: toc }
 </details>
 
-## [Jane Dane]
+## Leon Terencio Otte
 
 Contributions
-: Lorem ipsum dolor
-: Consetetur sadipscing elitr
-: ...
+: Umsetzung zentraler Projektbestandteile in Python (Backend-Logik / Routen) **Homescreen, Login, Register, AllMatches, CreateMatches**
+: Anbindung der Datenbank
+: Layout-Design
+: Dokumentation zum größeren Teil
 
 ## [Joe Doe]
 
