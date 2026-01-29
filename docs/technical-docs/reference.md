@@ -11,12 +11,12 @@ Leon Terencio Otte
 # Reference documentation
 
 
-<details open markdown="block">
+<!-- <details open markdown="block">
 {: .text-delta }
 <summary>Table of contents</summary>
 + ToC
 {: toc }
-</details>
+</details> -->
 
 ---
 
@@ -62,8 +62,8 @@ Browser shows: `Browser zeigt das Template `home.html` welches als Einstieg für
 
 **Purpose:** Anzeige einer Übersicht aller Matches
 
-**Sample output:** 
---
+**Sample output:** ![alt text](../assets/images/all-matches.jpg)
+-- Match Detail
 
 **Route:** `/match_detail/<int:match_id>`
 
@@ -73,7 +73,7 @@ Browser shows: `Browser zeigt das Template `home.html` welches als Einstieg für
 
 **Sample output:** ![alt text](../assets/images/details.png)
 
---
+--Create Matches
 
 Browser zeigt das Template `allmatches.html` mit einer Liste von Matches 
 
@@ -84,7 +84,7 @@ Browser zeigt das Template `allmatches.html` mit einer Liste von Matches
 **Purpose:** Erstellen eines neuen Matches durch den eingeloggten User. Anzeige eines Formulates zum Erstellen eines Matches und Speichern der Formulardaten in die Datenbank.
 
 **Sample output:** ![alt text](../assets/images/CreateMatch.jpg)
---
+-- My Matches
 
 **Route:** `/my-matches`
 
@@ -93,7 +93,7 @@ Browser zeigt das Template `allmatches.html` mit einer Liste von Matches
 **Purpose:** Anzeige aller Matches des von den User erstellten und den Matches, welchen er beigetreten ist.
 
 **Sample output:** ![alt text](../assets/images/my-matches.png)
---
+-- Join Matches
 
 **Route:** `/matches/<int:match_id>/join`
 
@@ -102,7 +102,7 @@ Browser zeigt das Template `allmatches.html` mit einer Liste von Matches
 **Purpose:** Fügt den aktuell eingeloggten User als Teilnehmer zu einem Match dazu. 
 
 **Sample output:** ![alt text](../assets/images/join.png)
---
+-- Leave Matches
 
 **Route:** `/matches/<int:match_id>/leave`
 
@@ -111,7 +111,7 @@ Browser zeigt das Template `allmatches.html` mit einer Liste von Matches
 **Purpose:** Entfernt den aktuell eingeloggten aus der Teilnehmerliste von dem Match.
 
 **Sample output:** ![alt text](../assets/images/leave.png)
---
+-- Cancel Match
 
 **Route:** `/matches/<int:match_id>/delete`
 
@@ -120,7 +120,7 @@ Browser zeigt das Template `allmatches.html` mit einer Liste von Matches
 **Purpose:** Löscht das Match aus der gesamten Datenbank. Nur der Host des Matches soll dazu berechtigt sein
 
 **Sample output:** ![alt text](../assets/images/delete.png)
---
+-- Notes
 
 **Route:** `/note`
 
