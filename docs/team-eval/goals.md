@@ -36,3 +36,15 @@ Es wurden sonst kaum Ziele aus meiner Sicht verfehlt, da Sie nicht zu hoch geset
 
 
 # Ayten Teshome
+
+## Goals achieved
+
+- Hauptziel wurde erreicht: Unsere Applikationsidee wurde erfolgreich umgesetzt
+- Wir haben effizient getrennt von einander gearbeitet durch geklärter Datenbankstruktur 
+- Sinnvolle commits wurden getätigt 
+- Die zusammenarbeit verlief reibungslos und unkompliziert
+
+
+## Goals missed
+
+/

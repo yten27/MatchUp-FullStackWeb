@@ -25,9 +25,11 @@ Contributions
 : Layout-Design
 : Dokumentation zum größeren Teil
 
-## [Joe Doe]
+## Ayten Teshome
 
 Contributions
-: Diam nonumy eirmod
-: Tempor invidunt ut labore
-: ...
+## Ayten Teshome
+Contributions
+: Umsetzung zentraler Backend-Logik rund um Matches (**My Matches, Match Details, Notes, Buttons**)
+: Zeit- und rollenbasierte Match-Verwaltung (Erstellung nur im Voraus, Ausblenden vergangener Matches)
+: Logik für Join / Leave / Cancel von Matches inkl. Host- und Teilnehmerstatus

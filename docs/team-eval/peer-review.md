@@ -21,15 +21,15 @@ nav_order: 3
 
 ### My observation (Wahrnehmung)
 
-[A specific observation, regarding know-how, effectiveness, team work or from another relevant area]
+Leon arbeitet im insgesamten sehr effektiv und fast fehlerlos. Er setzt seine Ziele früh fest und arbeitet diese nach. Das Grundverständis und die Grundstruktur unseres Projektes war ihm sehr wichtig zu verstehen bevor wir beginnen.
 
 ### Effect on me (Wirkung)
 
-[What positive or negative effect did this observation have on the reviewer?]
+Dadurch das ich mich auf Leon komplett verlassen konnte, konnte ich mich komplett auf meine Verantwortungen verlassen. Die Kommunikation war klar und direkt. 
 
 ### Tip for the future (Wunsch)
 
-[What should be changed or strengthened for the point of view of the reviewer?]
+
 
 ## [Ayten Teshome] - review 2
 

@@ -26,3 +26,9 @@ nav_order: 2
 ## Zusammenarbeit mit GitHub
 - Eine **klare Branch-Strategie** nutzen (z. B. Feature-Branches + Pull Requests) und nicht direkt in `main` arbeiten.
 - Pull Requests konsequenter prüfen und **Merge-Konflikte früh** lösen.
+
+# Ayten Teshome
+
+# Planung
+- Nicht zu klein denken und mit der Zeit weitere Feautures hinzufügen 
+- Grundlegenden Plan erstellen und hoch ansetzen, dann nach und nach ab arbeiten 
