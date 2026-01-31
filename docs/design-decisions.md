@@ -61,7 +61,7 @@ Unser Projektfokus liegt klar auf der Implementierung der Backend-Logik (Python 
 
 ---
 
-## [Example, delete this section] 02: How to delete?(AYTEN, hier fehlt noch was) 
+## 02: [Umgang mit vergangenen Matches – Zeit- & rollenbasierte Sichtbarkeit]
 
 ### Meta
 
@@ -79,8 +79,11 @@ Sollte ein Match vergangen sein, sollte es die All Matches Seite nicht unnötig 
 
 
 Ziel war daher:
+
 	•	Eine aufgeräumte öffentliche Match-Übersicht
+
 	•	Planungssicherheit für Teilnehmer
+
 	•	Volle Kontrolle für Hosts über ihre erstellten Matches
 
 
@@ -91,22 +94,40 @@ Wir haben uns gegen ein automatisches Löschen oder kurzfristiges Stornieren ent
 
 Konkret:
 	•	Mindestens 2 Stunden vor Start muss das Match erstellt werden
+
 	•	2 Stunden nach Beginn werden Matches:
+
 	•	aus Match Details entfernt
+
 	•	aus der Liste der beigetretenen Matches entfernt
+
 	•	Der Host hat jedoch immer noch die Möglichkeit das Match mit allen Teilnehmern anzurufen bei "erstellten
+
     Matches", dort kann er sie manuell löschen 
 
 Diese Lösung sorgt für eine saubere Nutzeroberfläche, ohne dem Host wichtige Informationen oder Kontrolle zu entziehen.
+
 **Decision was taken by:** github/yten27
 
 
 ### Regarded options
 
 Folgende Optionen wurden evaluiert:
-	1.	Automatisches Löschen von Matches nach Spielende
-	2.	Automatisches Stornieren kurz vor Spielbeginn (z. B. bei zu wenigen Teilnehmern)
-	3.	Zeit- und rollenbasierte Sichtbarkeit (gewählte Lösung)
+
+	•   Automatisches Löschen von Matches nach Spielende
+
+    •   Automatisches Stornieren kurz vor Spielbeginn (z. B. bei zu wenigen Teilnehmern)
+
+	•   Zeit- und rollenbasierte Sichtbarkeit (gewählte Lösung)
+
+    Criterion                     | Manuell (request.form) | Flask-WTF ohne CSRF | Flask-WTF + CSRF
+-----------------------------|-------------------------|---------------------|-----------------
+Entwicklungsdauer            | ❌ Langsam              | ✔️ Schnell          | ✔️ Schnell
+Code-Übersichtlichkeit       | ❌ Eher unübersichtlich | ✔️ Gut              | ✔️ Gut
+Validierung/Fehlermeldungen  | ❌ Viel Handarbeit      | ✔️ Gut              | ✔️ Gut
+Sicherheit (CSRF bei POST)   | ❌ Extra Aufwand        | ❌ Fehlend           | ✔️ Standardmäßig dabei
+
+
 
 
 ## 03: Forms & Validation - FLASK-WTF & CSRF Protection
