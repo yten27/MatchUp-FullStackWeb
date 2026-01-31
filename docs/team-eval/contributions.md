@@ -17,16 +17,19 @@ nav_order: 4
 {: toc }
 </details>
 
-## [Jane Dane]
+## Leon Terencio Otte
 
 Contributions
-: Lorem ipsum dolor
-: Consetetur sadipscing elitr
-: ...
+: Umsetzung zentraler Projektbestandteile in Python (Backend-Logik / Routen) **Homescreen, Login, Register, AllMatches, CreateMatches**
+: Anbindung der Datenbank
+: Layout-Design
+: Dokumentation zum größeren Teil
 
-## [Joe Doe]
+## Ayten Teshome
 
 Contributions
-: Diam nonumy eirmod
-: Tempor invidunt ut labore
-: ...
+## Ayten Teshome
+Contributions
+: Umsetzung zentraler Backend-Logik rund um Matches (**My Matches, Match Details, Notes, Buttons**)
+: Zeit- und rollenbasierte Match-Verwaltung (Erstellung nur im Voraus, Ausblenden vergangener Matches)
+: Logik für Join / Leave / Cancel von Matches inkl. Host- und Teilnehmerstatus

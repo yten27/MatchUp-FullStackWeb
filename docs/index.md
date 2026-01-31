@@ -21,10 +21,12 @@ Matr.-Nr.
 ### Ayten Teshome
 
 About
-: Some info about Ayten
+: Verantwortlich für die zentrale Backend-Logik rund um Matches und Teilnehmer.
+Das umfasste insbesondere die Implementierung der Match-Details, Beitritts- und Verlass-Logik, zeitbasierte Regeln (z. B. Sichtbarkeit vergangener Spiele) sowie die rollenbasierte Unterscheidung zwischen Host und Teilnehmer.
+Zusätzlich habe ich die zugehörigen Datenbankabfragen und Teile der Frontend-Anbindung für diese Logik umgesetzt.
 
 Matr.-Nr.
-: 1234567
+: 77205594968
 
 ## Eidesstattliche Erklärung
 

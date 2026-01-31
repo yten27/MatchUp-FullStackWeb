@@ -20,9 +20,9 @@ Leon Terencio Otte, Ayten Teshome
 
 ---
 
-## Route References:
+# Route References:
 
---- Home 
+## Home 
 
 **Route:** `/`
 **Route:** `/home`
@@ -35,7 +35,7 @@ Leon Terencio Otte, Ayten Teshome
 
 Browser shows: `Browser zeigt das Template `home.html` welches als Einstieg für MatchUP UI dient.`
 
---- Authentifizieren
+## Authentifizieren
 
 **Route:** `/register`
 
@@ -44,7 +44,7 @@ Browser shows: `Browser zeigt das Template `home.html` welches als Einstieg für
 **Purpose:** Regestrierungsformular anzeigen, Regestrierungsdaten verarbeiten & neuen User anlegen
 
 **Sample output:** ![alt text](../assets/images/Register.jpg)
---
+
 
 **Route:** `/login`
 
@@ -54,7 +54,7 @@ Browser shows: `Browser zeigt das Template `home.html` welches als Einstieg für
 
 **Sample output:** ![alt text](../assets/images/Login.jpg)
 
---- Match Management
+## All Matches
 
 **Route:** `/allmatches`
 
@@ -64,7 +64,7 @@ Browser shows: `Browser zeigt das Template `home.html` welches als Einstieg für
 
 **Sample output:** ![alt text](../assets/images/all-matches.png)
 
--- Match Detail
+## Match Detail
 
 **Route:** `/match_detail/<int:match_id>`
 
@@ -74,9 +74,7 @@ Browser shows: `Browser zeigt das Template `home.html` welches als Einstieg für
 
 **Sample output:** ![alt text](../assets/images/details.png)
 
---Create Matches
-
-Browser zeigt das Template `allmatches.html` mit einer Liste von Matches 
+## Create Matches
 
 **Route:** `/matches/create`
 
@@ -85,7 +83,8 @@ Browser zeigt das Template `allmatches.html` mit einer Liste von Matches
 **Purpose:** Erstellen eines neuen Matches durch den eingeloggten User. Anzeige eines Formulates zum Erstellen eines Matches und Speichern der Formulardaten in die Datenbank.
 
 **Sample output:** ![alt text](../assets/images/CreateMatch.png)
--- My Matches
+
+## My Matches
 
 **Route:** `/my-matches`
 
@@ -94,7 +93,7 @@ Browser zeigt das Template `allmatches.html` mit einer Liste von Matches
 **Purpose:** Anzeige aller Matches des von den User erstellten und den Matches, welchen er beigetreten ist.
 
 **Sample output:** ![alt text](../assets/images/my-matches.png)
--- Join Matches
+## Join Matches
 
 **Route:** `/matches/<int:match_id>/join`
 
@@ -103,7 +102,7 @@ Browser zeigt das Template `allmatches.html` mit einer Liste von Matches
 **Purpose:** Fügt den aktuell eingeloggten User als Teilnehmer zu einem Match dazu. 
 
 **Sample output:** ![alt text](../assets/images/join.png)
--- Leave Matches
+## Leave Matches
 
 **Route:** `/matches/<int:match_id>/leave`
 
@@ -112,7 +111,7 @@ Browser zeigt das Template `allmatches.html` mit einer Liste von Matches
 **Purpose:** Entfernt den aktuell eingeloggten aus der Teilnehmerliste von dem Match.
 
 **Sample output:** ![alt text](../assets/images/leave.png)
--- Cancel Match
+## Cancel Match
 
 **Route:** `/matches/<int:match_id>/delete`
 
@@ -121,7 +120,8 @@ Browser zeigt das Template `allmatches.html` mit einer Liste von Matches
 **Purpose:** Löscht das Match aus der gesamten Datenbank. Nur der Host des Matches soll dazu berechtigt sein
 
 **Sample output:** ![alt text](../assets/images/delete.png)
--- Notes
+
+## Notes
 
 **Route:** `/note`
 
@@ -130,4 +130,31 @@ Browser zeigt das Template `allmatches.html` mit einer Liste von Matches
 **Purpose:** Ermöglicht es dem User Notizen zu erstellen, anzusehen und speichern.
 
 **Sample output:** ![alt text](../assets/images/notes.png)
---
+
+---
+
+## API (Headless JSON)
+
+**JSON statt HTML** für Anforderung einer "headless API"
+
+### Get all matches (JSON)
+
+**Route:** `/api/matches`
+
+**Methods:** `GET`
+
+**Purpose:** Gibt alle in der Datenbank gespeicherten Matches als JSON zurück (ohne Frontend/Jinja).  
+Nützlich dann später für eventuelle externe Clients wie später Mobile App.
+
+**Example response:**
+```json
+[
+  {
+    "id": 1,
+    "title": "Preußen Kick",
+    "location": "Savignyplatz",
+    "match_time": "2026-01-15 15:30",
+    "price": 110,
+    "host_user_id": 1
+  }
+]

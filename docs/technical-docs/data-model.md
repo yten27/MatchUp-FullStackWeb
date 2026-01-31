@@ -9,7 +9,7 @@ nav_order: 2
 
 {: .no_toc }
 # Data model
-![get_lists() sample](../assets/images/Data_Model_2.png)
+![get_lists() sample](../assets/images/Data_Model.png)
 
 
 ---
