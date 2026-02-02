@@ -19,5 +19,3 @@ nav_order: 2
 + ToC
 {: toc }
 </details>
-
-[Visualize and describe the data model(s) of your application. This description should match the actual implementation.]

@@ -19,8 +19,6 @@ nav_order: 1
 
 ## Overview
 
-[Give a high-level overview of what your app does and how it achieves it: similar to the value proposition, but targeted at a fellow developer who wishes to contribute.]
-
 MatchUP ist eine Webanwendung, die auf dem **Python Flask** Framework basiert. Ziel der Architektur ist eine strikte Trennung von Datenhaltung (SQLite) und Präsentation (HTML und Nutzung von Bootstrap), gesteuert mit den Flask-Routen.
 
 Die App funktioniert wie folgt: 
@@ -32,8 +30,6 @@ Die App funktioniert wie folgt:
    
 
 ## Codemap
-
-[Describe how your app is structured. Don't aim for completeness, rather describe *just* the most important parts.]
 
 ### 1. Business Logic (`app.py`)
 Dies ist der Einstiegspunkt der Anwendung.
@@ -52,8 +48,6 @@ Das Frontend basiert auf **Jinja2** Template-Vererbung.
 * **`match_*.html` / `*match.html`:** Alles rund um Matches (Liste, Details, Erstellen).
 
 ## Cross-cutting concerns
-
-[Describe anything that is important for a solid understanding of your codebase. Most likely, you want to explain the behavior of (parts of) your application. In this section, you may also link to important [design decisions](../design-decisions.md).]
 
 Diese Konzepte ziehen sich durch den gesamten Code und sorgen für Sicherheit und Stabilität:
 

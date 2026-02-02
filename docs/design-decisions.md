@@ -16,7 +16,7 @@ nav_order: 3
 {: toc }
 </details>
 
-## 01: [Frontend Styling Framework - Bootstrap & AI Support]
+## 01: Frontend Styling Framework - Bootstrap & AI Support
 
 ### Meta
 
@@ -28,13 +28,9 @@ Updated
 
 ### Problem statement
 
-[Describe the problem to be solved or the goal to be achieved. Include relevant context information.]
-
 Unser Projektfokus liegt klar auf der Implementierung der Backend-Logik (Python mit Flask). Da wir begrenzte Zeit haben, wollen wir das Design nicht als Priorität definieren. Gleichzeitig soll die App aber nicht wie eine 08/15 Standard Vorlage aussehen, sondern durch und durch nach Fußball aussehen, ohne dass wir wochenlang CSS schreiben müssen.
 
 ### Decision
-
-[Describe **which** design decision was taken for **what reason** and by **whom**.]
 
 *Wir kombinieren Bootstrap 5 mit KI-gestützter Anpassung.**
 
@@ -46,8 +42,6 @@ Unser Projektfokus liegt klar auf der Implementierung der Backend-Logik (Python 
 **Decision was taken by:** github/leongit11
 
 ### Regarded options
-
-[Describe any possible design decision that will solve the problem. Assess these options, e.g., via a simple pro/con list.]
 
 1.  **Custom CSS (Alles selbst schreiben)**
 2.  **Bootstrap Standard (Ohne Anpassung)**
@@ -61,7 +55,7 @@ Unser Projektfokus liegt klar auf der Implementierung der Backend-Logik (Python 
 
 ---
 
-## 02: [Umgang mit vergangenen Matches – Zeit- & rollenbasierte Sichtbarkeit]
+## 02: Umgang mit vergangenen Matches – Zeit- & rollenbasierte Sichtbarkeit
 
 ### Meta
 
@@ -69,7 +63,7 @@ Status
 : Work in progress - **Decided** - Obsolete
 
 Updated
-: 30-Jun-2024
+: 30-01-2026
 
 ### Problem statement
 
@@ -80,11 +74,11 @@ Sollte ein Match vergangen sein, sollte es die All Matches Seite nicht unnötig 
 
 Ziel war daher:
 
-	•	Eine aufgeräumte öffentliche Match-Übersicht
+•	Eine aufgeräumte öffentliche Match-Übersicht
 
-	•	Planungssicherheit für Teilnehmer
+•	Planungssicherheit für Teilnehmer
 
-	•	Volle Kontrolle für Hosts über ihre erstellten Matches
+•	Volle Kontrolle für Hosts über ihre erstellten Matches
 
 
 
@@ -93,17 +87,15 @@ Ziel war daher:
 Wir haben uns gegen ein automatisches Löschen oder kurzfristiges Stornieren entschieden und stattdessen eine zeit- und rollenbasierte Sichtbarkeitslogik implementiert.
 
 Konkret:
-	•	Mindestens 2 Stunden vor Start muss das Match erstellt werden
+•	Mindestens 2 Stunden vor Start muss das Match erstellt werden
 
-	•	2 Stunden nach Beginn werden Matches:
+•	2 Stunden nach Beginn werden Matches:
 
-	•	aus Match Details entfernt
+•	aus Match Details entfernt
 
-	•	aus der Liste der beigetretenen Matches entfernt
+•	aus der Liste der beigetretenen Matches entfernt
 
-	•	Der Host hat jedoch immer noch die Möglichkeit das Match mit allen Teilnehmern anzurufen bei "erstellten
-
-    Matches", dort kann er sie manuell löschen 
+•	Der Host hat jedoch immer noch die Möglichkeit das Match mit allen Teilnehmern anzurufen bei "erstellten Matches", dort kann er sie manuell löschen 
 
 Diese Lösung sorgt für eine saubere Nutzeroberfläche, ohne dem Host wichtige Informationen oder Kontrolle zu entziehen.
 
@@ -114,11 +106,11 @@ Diese Lösung sorgt für eine saubere Nutzeroberfläche, ohne dem Host wichtige 
 
 Folgende Optionen wurden evaluiert:
 
-	•   Automatisches Löschen von Matches nach Spielende
+•   Automatisches Löschen von Matches nach Spielende
 
-    •   Automatisches Stornieren kurz vor Spielbeginn (z. B. bei zu wenigen Teilnehmern)
+•   Automatisches Stornieren kurz vor Spielbeginn (z. B. bei zu wenigen Teilnehmern)
 
-	•   Zeit- und rollenbasierte Sichtbarkeit (gewählte Lösung)
+•   Zeit- und rollenbasierte Sichtbarkeit (gewählte Lösung)
 
     Criterion                     | Manuell (request.form) | Flask-WTF ohne CSRF | Flask-WTF + CSRF
 -----------------------------|-------------------------|---------------------|-----------------
