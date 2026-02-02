@@ -53,7 +53,7 @@ Diese Konzepte ziehen sich durch den gesamten Code und sorgen für Sicherheit un
 
 ### Session-Based Authentication
 Die Authentifizierung erfolgt über Server-Sessions.
-* **Login: / Registrieren: ** Wenn Email und Passwort korrekt sind, speichern wir die `user_id` in der Session des Browsers.
+* **Login: / Registrieren:** Wenn Email und Passwort korrekt sind, speichern wir die `user_id` in der Session des Browsers.
 * **Zugriffsschutz:** Routen wie `create_match` prüfen am Anfang: `if 'user_id' not in session`. Ist der Nutzer nicht eingeloggt, wird er sofort zur Login-Seite umgeleitet und die Funktion bricht ab.
 
 ### Resource Management (Datenbank)

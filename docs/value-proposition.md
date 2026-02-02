@@ -16,11 +16,14 @@ nav_order: 1
 {: toc }
 </details>
 
-## The problem
+## The Problem
 
-Freizeitfußballer wollen gerne regelmäßig Fußball spielen, jedoch stehen ihnen folgende Probleme oft im Weg: 
+Freizeitfußballer wollen gerne regelmäßig Fußball spielen, jedoch stehen ihnen folgende Probleme oft im Weg:
+
 •⁠  ⁠Nicht genügend Mitspieler 
+
 •⁠  ⁠Gruppen zu spontan, chaotisch und unstruktutiert
+
 •⁠  ⁠unklar wer erscheint und wie Platzpreis aufgeteilt wird 
 
 Es fehlt eine simple und zentrale Lösung, sodass es zu einer strukturierten Fußballpartie führen kann. 
@@ -28,15 +31,23 @@ Es fehlt eine simple und zentrale Lösung, sodass es zu einer strukturierten Fu�
 ## Our solution
 
 MatchUp wird diese Problematiken beseitigen:
+
 •⁠  ⁠Nutzer können Matches individuell erstellen, wo sie Ort, Zeit und Anzahl der Spieler angeben können 
+
 •⁠  ⁠Spieler können sich per einen Klick anmelden 
+
 •⁠  ⁠In-Echzeit wird angezeigt wie viele Spieler sich angemeldet haben 
+
 •⁠  ⁠Matches werden übersichtlich angezeigt, der Nutzer sieht seine erstellten games, seine eingetragenen und offene Matches
+
 •⁠  ⁠Somit werden Spiele strukturiert und klar organisisert 
 
 ## Target user
+
 •⁠  ⁠Freizeitfußballer 
+
 •⁠  ⁠kleinere Freundesgruppen 
+
 •⁠  ⁠Platz-Hosts
 
 

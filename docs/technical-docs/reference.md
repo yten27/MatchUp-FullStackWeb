@@ -11,12 +11,12 @@ Leon Terencio Otte, Ayten Teshome
 # Reference documentation
 
 
-<!-- <details open markdown="block">
+<details open markdown="block">
 {: .text-delta }
 <summary>Table of contents</summary>
 + ToC
 {: toc }
-</details> -->
+</details> 
 
 ---
 

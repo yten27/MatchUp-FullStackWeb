@@ -32,7 +32,7 @@ Unser Projektfokus liegt klar auf der Implementierung der Backend-Logik (Python 
 
 ### Decision
 
-*Wir kombinieren Bootstrap 5 mit KI-gestützter Anpassung.**
+**Wir kombinieren Bootstrap 5 mit KI-gestützter Anpassung.**
 
 1.  **Basis (Bootstrap):** Wir nutzen das Framework für das grobe Layout und funktionale Komponenten (Forms, Buttons, Navigationsleiste). Das spart uns die Arbeit für die Grundstruktur.
 2.  **Anpassung (KI-Support):** Um Zeit zu sparen, haben wir KI-Tools genutzt (Gemini), um spezifische CSS-Anpassungen (Custom CSS) zu generieren. Anstatt CSS-Klassen manuell nachzuschlagen, ließen wir uns Code-Snippets für Farbschemata und das Styling erstellen. [[Link zur kompletten Chatverlauf mit Gemini]]
@@ -87,6 +87,7 @@ Ziel war daher:
 Wir haben uns gegen ein automatisches Löschen oder kurzfristiges Stornieren entschieden und stattdessen eine zeit- und rollenbasierte Sichtbarkeitslogik implementiert.
 
 Konkret:
+
 •	Mindestens 2 Stunden vor Start muss das Match erstellt werden
 
 •	2 Stunden nach Beginn werden Matches:
@@ -111,15 +112,6 @@ Folgende Optionen wurden evaluiert:
 •   Automatisches Stornieren kurz vor Spielbeginn (z. B. bei zu wenigen Teilnehmern)
 
 •   Zeit- und rollenbasierte Sichtbarkeit (gewählte Lösung)
-
-    Criterion                     | Manuell (request.form) | Flask-WTF ohne CSRF | Flask-WTF + CSRF
------------------------------|-------------------------|---------------------|-----------------
-Entwicklungsdauer            | ❌ Langsam              | ✔️ Schnell          | ✔️ Schnell
-Code-Übersichtlichkeit       | ❌ Eher unübersichtlich | ✔️ Gut              | ✔️ Gut
-Validierung/Fehlermeldungen  | ❌ Viel Handarbeit      | ✔️ Gut              | ✔️ Gut
-Sicherheit (CSRF bei POST)   | ❌ Extra Aufwand        | ❌ Fehlend           | ✔️ Standardmäßig dabei
-
-
 
 
 ## 03: Forms & Validation - FLASK-WTF & CSRF Protection

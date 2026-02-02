@@ -29,6 +29,6 @@ MatchUp
 
 # Ayten Teshome
 
-# Planung
+## Planung
 - Nicht zu klein denken und mit der Zeit weitere Feautures hinzufügen 
 - Grundlegenden Plan erstellen und hoch ansetzen, dann nach und nach ab arbeiten 

@@ -16,7 +16,7 @@ nav_order: 4
 {: toc }
 </details>
 
-## 01: [Title]
+## 01: Testdurchlauf
 
 ### Meta
 
@@ -33,9 +33,12 @@ wie gut Nutzer Matches erstellen, finden und ihnen beitreten können,
 und ob zeitliche Regeln (z. B. Mindestvorlauf von 2 Stunden) verständlich sind oder zu Frustration führen.
 
 Konkret wollten wir beantworten:
-	•	Wie lange benötigen Nutzer, um ein Match zu erstellen?
-	•	Werden zeitliche Einschränkungen korrekt verstanden?
-	•	Gibt es Abbrüche oder Verwirrung im Erstellungs- oder Beitrittsprozess?
+
+•	Wie lange benötigen Nutzer, um ein Match zu erstellen?
+
+•	Werden zeitliche Einschränkungen korrekt verstanden?
+
+•	Gibt es Abbrüche oder Verwirrung im Erstellungs- oder Beitrittsprozess?
 
 
 
