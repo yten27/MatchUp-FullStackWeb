@@ -2,6 +2,9 @@
 
 Das Repository ist angelegt für das Projekt im Modul FSWD an der HWR Berlin von Ayten Teshome und Leon Terencio Otte. 
 
+# Dokumentation dieses Projekt über GitHub Pages:
+https://yten27.github.io/MatchUp-FullStackWeb/
+
 # Steps to execute the app
 
 **Step 1:** set up and activate a [Python Virtual Environment](https://hwrberlin.github.io/fswd/python-vscode.html#32-use-the-python-virtual-environment-as-default-for-this-workspace).
