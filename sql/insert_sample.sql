@@ -1,4 +1,4 @@
-_BEGIN TRANSACTION;
+BEGIN TRANSACTION;
 
 DELETE FROM match_participant;
 DELETE FROM note;
@@ -55,11 +55,5 @@ INSERT INTO match_participant (user_id, match_id) VALUES (5, 3);
 -- Match 4 
 INSERT INTO match_participant (user_id, match_id) VALUES (4, 4);
 INSERT INTO match_participant (user_id, match_id) VALUES (2, 4);
-
--- 4) NOTES
-
-INSERT INTO note (user_id, content) VALUES (1, "Host-Notiz: Bälle + Leibchen einpacken.");
-INSERT INTO note (user_id, content) VALUES (2, "Halle: Schlüssel 19:45 abholen.");
-INSERT INTO note (user_id, content) VALUES (5, "Nächstes Mal früher zusagen.");
 
 COMMIT;

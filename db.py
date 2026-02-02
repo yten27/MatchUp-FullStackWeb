@@ -33,6 +33,12 @@ def init_db():
     click.echo('Database has been initialized.')
 
 
+def insert_sample():
+  db_con = get_db_con()
+  with current_app.open_resource('sql/insert_sample.sql') as f:
+      db_con.executescript(f.read().decode('utf8'))
+
+
 # Neue Funktion zum Abrufen aller Matches
 def get_all_matches():
     db_con = get_db_con()
@@ -72,8 +78,3 @@ def upsert_user_note(user_id: int, content: str) -> None:
     )
     db_con.commit()
     # änderung dauerhaft speichern
-
-    def insert_sample():
-        db_con = get_db_con()
-        with current_app.open_resource('sql/insert_sample.sql') as f:
-            db_con.executescript(f.read().decode('utf8'))
