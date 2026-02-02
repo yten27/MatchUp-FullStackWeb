@@ -17,7 +17,7 @@ MatchUp
 {: toc }
 </details>
 
-## [Leon Terencio Otte] - review 1
+## Leon Terencio Otte - review 1
 
 ### My observation (Wahrnehmung)
 
@@ -28,10 +28,10 @@ Leon arbeitet im insgesamten sehr effektiv und fast fehlerlos. Er setzt seine Zi
 Dadurch das ich mich auf Leon komplett verlassen konnte, konnte ich mich komplett auf meine Verantwortungen verlassen. Die Kommunikation war klar und direkt. 
 
 ### Tip for the future (Wunsch)
+/
 
 
-
-## [Ayten Teshome] - review 2
+## Ayten Teshome - review 2
 
 ### My observation (Wahrnehmung)
 

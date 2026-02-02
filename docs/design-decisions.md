@@ -35,7 +35,7 @@ Unser Projektfokus liegt klar auf der Implementierung der Backend-Logik (Python 
 **Wir kombinieren Bootstrap 5 mit KI-gestützter Anpassung.**
 
 1.  **Basis (Bootstrap):** Wir nutzen das Framework für das grobe Layout und funktionale Komponenten (Forms, Buttons, Navigationsleiste). Das spart uns die Arbeit für die Grundstruktur.
-2.  **Anpassung (KI-Support):** Um Zeit zu sparen, haben wir KI-Tools genutzt (Gemini), um spezifische CSS-Anpassungen (Custom CSS) zu generieren. Anstatt CSS-Klassen manuell nachzuschlagen, ließen wir uns Code-Snippets für Farbschemata und das Styling erstellen. [[Link zur kompletten Chatverlauf mit Gemini]]
+2.  **Anpassung (KI-Support):** Um Zeit zu sparen, haben wir KI-Tools genutzt (Gemini), um spezifische CSS-Anpassungen (Custom CSS) zu generieren. Anstatt CSS-Klassen manuell nachzuschlagen, ließen wir uns Code-Snippets für Farbschemata und das Styling erstellen. [[[Link zur kompletten Chatverlauf mit Gemini](https://gemini.google.com/share/3d6b13052522)]]
 
 **Vorteil:** Wir konnten uns auf den Python-Code konzentrieren, haben aber trotzdem ein sauber gestyltes Frontend, das über den Standard-Look hinausgeht.
 
